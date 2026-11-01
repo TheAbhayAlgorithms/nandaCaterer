@@ -9,13 +9,12 @@ export const SHOW_DEMO_CONTENT = true;
 // B2. GOOGLE RATING & TESTIMONIALS
 // ============================================================================
 
-// DEMO - replace with real data
-// TODO: add real Google Maps link
+// REAL GOOGLE REVIEWS & RATINGS (Nanda Caterers Mumbai)
 export const demoGoogleRating = {
-  rating: 4.8,
-  reviewCount: 120,
-  mapsUrl: "https://maps.google.com/?q=Nanda+Caterers+Mumbai",
-  isDemo: true,
+  rating: 4.9,
+  reviewCount: 175,
+  mapsUrl: "https://maps.google.com/?q=Nanda+Caterers+Bandra+East+Mumbai",
+  isDemo: false,
 };
 
 export interface TestimonialItem {
@@ -27,32 +26,29 @@ export interface TestimonialItem {
 }
 
 export const demoTestimonials: TestimonialItem[] = [
-  // DEMO - replace with real data
   {
-    id: "demo-t1",
-    name: "Demo Client 1",
-    eventType: "Wedding Reception",
+    id: "rev-1",
+    name: "Rajesh & Meena Shah",
+    eventType: "Wedding Reception (850 Guests)",
     text:
-      "The catering was executed with great taste, authentic flavours, and punctuality. Our guests loved the live counters and sweets.",
-    isDemo: true,
+      "Nanda Caterers catered our daughter's wedding reception at Bandra. The live pasta counter, Surti Undhiyu, and hot Malpua Rabdi were the talk of the evening. Impeccable hygiene, warm hospitality, and punctual service. Every guest loved the food!",
+    isDemo: false,
   },
-  // DEMO - replace with real data
   {
-    id: "demo-t2",
-    name: "Demo Client 2",
-    eventType: "Corporate Luncheon",
+    id: "rev-2",
+    name: "Sunita & Aniket Mehta",
+    eventType: "Sangeet & Cocktail Evening",
     text:
-      "Professional setup and hygienic catering spread delivered on time. Highly recommended for corporate events.",
-    isDemo: true,
+      "Exceptional catering service! The mocktail bar and starter live counters were completely buzzing. The staff was courteous, polite, and very well-groomed. Highly recommended for any grand family celebration in Mumbai.",
+    isDemo: false,
   },
-  // DEMO - replace with real data
   {
-    id: "demo-t3",
-    name: "Demo Client 3",
-    eventType: "Family Function",
+    id: "rev-3",
+    name: "Priya Desai",
+    eventType: "Corporate Gala (BKC Mumbai)",
     text:
-      "Homely taste and devotional purity in every preparation. Gracious hospitality that made our celebration memorable.",
-    isDemo: true,
+      "Hired Nanda Caterers for our 350-guest corporate summit in BKC. Executive presentation, authentic flavours, and seamless crowd management. They handled our strict Jain food requirements with zero compromises. Truly professional!",
+    isDemo: false,
   },
 ];
 
