@@ -117,7 +117,7 @@ export function HomeTestimonials() {
 
         {/* Testimonial Cards Grid (Reusing exact same design & responsive layout) */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {reviewsToDisplay.map((item: StandardReview) => {
+          {reviewsToDisplay.map((item: StandardReview, index: number) => {
             const isLong = item.text.length > 180;
             const isExpanded = expandedReviews[item.id];
             const displayText = isLong && !isExpanded
@@ -181,7 +181,11 @@ export function HomeTestimonials() {
                         {item.name}
                       </h4>
                       <div className="flex items-center gap-1.5 text-[11px] text-accent font-medium mt-0.5">
-                        <span>{item.eventType || "Google Verified"}</span>
+                        <span>
+                          {item.isGoogleReview
+                            ? (index === 0 ? "★ Latest Google Review" : "Google Verified")
+                            : (item.eventType || "Verified Host")}
+                        </span>
                         {item.relativeTime && (
                           <>
                             <span className="text-ink/30">•</span>

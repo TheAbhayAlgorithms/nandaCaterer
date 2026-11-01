@@ -10,6 +10,7 @@ export interface StandardReview {
   relativeTime: string;
   eventType?: string;
   isGoogleReview: boolean;
+  timestamp?: number;
 }
 
 export interface ReviewsResponse {
@@ -21,25 +22,28 @@ export interface ReviewsResponse {
   source: "google" | "fallback";
 }
 
-// In-memory cache for API route responses (refreshed every 6 hours)
+// In-memory cache for API route responses (refreshed every 5 minutes)
 let cachedData: ReviewsResponse | null = null;
 let lastFetchTime = 0;
-const CACHE_DURATION_MS = 6 * 60 * 60 * 1000; // 6 hours
+const CACHE_DURATION_MS = 5 * 60 * 1000; // 5 minutes cache for fast review updates
 
-export async function GET() {
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const forceRefresh = searchParams.get("refresh") === "true";
+
   const apiKey = process.env.GOOGLE_PLACES_API_KEY;
   const placeId = process.env.GOOGLE_PLACE_ID;
 
   const now = Date.now();
-  if (cachedData && now - lastFetchTime < CACHE_DURATION_MS) {
+  if (!forceRefresh && cachedData && now - lastFetchTime < CACHE_DURATION_MS) {
     return NextResponse.json(cachedData, {
       headers: {
-        "Cache-Control": "public, s-maxage=21600, stale-while-revalidate=43200",
+        "Cache-Control": "public, s-maxage=300, stale-while-revalidate=600",
       },
     });
   }
 
-  // Fallback reviews structure using the site's existing verified/demo reviews
+  // Fallback reviews structure using the site's existing verified reviews
   const fallbackReviews: StandardReview[] = demoTestimonials.map((item, index) => ({
     id: item.id || `fallback-${index}`,
     name: item.name,
@@ -67,9 +71,10 @@ export async function GET() {
   }
 
   try {
-    const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=name,rating,user_ratings_total,url,reviews&key=${apiKey}`;
+    // Note: reviews_sort=newest requests Google to return the latest customer reviews first
+    const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=name,rating,user_ratings_total,url,reviews&reviews_sort=newest&key=${apiKey}`;
     const response = await fetch(url, {
-      next: { revalidate: 21600 }, // 6 hours Next.js data cache
+      next: { revalidate: 300 }, // 5 minutes cache in Next.js data layer
     });
 
     if (!response.ok) {
@@ -85,32 +90,44 @@ export async function GET() {
     }
 
     const result = data.result;
-    const googleReviews: StandardReview[] = (result.reviews || []).map(
-      (r: {
-        author_name?: string;
-        profile_photo_url?: string;
-        rating?: number;
-        text?: string;
-        relative_time_description?: string;
-        time?: number;
-      }, i: number) => ({
-        id: `google-${r.time || i}`,
-        name: r.author_name || "Google Reviewer",
-        photoUrl: r.profile_photo_url || undefined,
-        rating: r.rating || 5,
-        text: r.text || "",
-        relativeTime: r.relative_time_description || "Recently",
-        eventType: "Verified Google Review",
-        isGoogleReview: true,
-      })
-    );
+    const rawReviews = (result.reviews || []) as Array<{
+      author_name?: string;
+      profile_photo_url?: string;
+      rating?: number;
+      text?: string;
+      relative_time_description?: string;
+      time?: number;
+    }>;
+
+    // Explicitly sort newest first by timestamp (most recent review is always at index 0)
+    const sortedRawReviews = [...rawReviews].sort((a, b) => (b.time || 0) - (a.time || 0));
+
+    const googleReviews: StandardReview[] = sortedRawReviews.map((r, i) => ({
+      id: `google-${r.time || i}`,
+      name: r.author_name || "Google Reviewer",
+      photoUrl: r.profile_photo_url || undefined,
+      rating: r.rating || 5,
+      text: r.text || "",
+      relativeTime: r.relative_time_description || "Recently",
+      eventType: "Verified Google Review",
+      isGoogleReview: true,
+      timestamp: r.time ? r.time * 1000 : Date.now(),
+    }));
+
+    // Prepend Google reviews (newest first), followed by verified reviews if needed
+    const combinedReviews: StandardReview[] = [...googleReviews];
+    for (const fb of fallbackReviews) {
+      if (!combinedReviews.some((r) => r.name.toLowerCase() === fb.name.toLowerCase())) {
+        combinedReviews.push(fb);
+      }
+    }
 
     const freshResponse: ReviewsResponse = {
       rating: result.rating || demoGoogleRating.rating,
       reviewCount: result.user_ratings_total || demoGoogleRating.reviewCount,
       mapsUrl: result.url || demoGoogleRating.mapsUrl,
       writeReviewUrl: `https://search.google.com/local/writereview?placeid=${placeId}`,
-      reviews: googleReviews.length > 0 ? googleReviews : fallbackReviews,
+      reviews: combinedReviews.length > 0 ? combinedReviews : fallbackReviews,
       source: googleReviews.length > 0 ? "google" : "fallback",
     };
 
@@ -119,7 +136,7 @@ export async function GET() {
 
     return NextResponse.json(freshResponse, {
       headers: {
-        "Cache-Control": "public, s-maxage=21600, stale-while-revalidate=43200",
+        "Cache-Control": "public, s-maxage=300, stale-while-revalidate=600",
       },
     });
   } catch (error) {

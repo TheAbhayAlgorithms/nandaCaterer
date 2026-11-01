@@ -7,6 +7,7 @@ import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { Button } from "@/components/ui/Button";
 import { RelatedPages } from "@/components/ui/RelatedPages";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
+import { TestimonialsFeed } from "@/components/testimonials/TestimonialsFeed";
 
 export const metadata: Metadata = {
   title: "Client Testimonials & Reviews | Verified Wedding & Corporate Hosts",
@@ -100,55 +101,9 @@ export default function TestimonialsPage() {
         </div>
       </section>
 
-      {/* Testimonials Grid */}
+      {/* Testimonials Grid with Dynamic Latest Google Reviews First */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {testimonialsData.map((item) => (
-            <div
-              key={item.id}
-              className="bg-ivory rounded-3xl p-6 sm:p-8 border border-turmeric/30 shadow-xs hover:shadow-md transition-shadow flex flex-col justify-between"
-            >
-              <div>
-                {/* Rating Stars & Badge */}
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-1 text-gold">
-                    {[...Array(item.rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-gold text-gold" />
-                    ))}
-                  </div>
-                  {item.isVerified && (
-                    <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
-                      <CheckCircle2 className="w-3 h-3" />
-                      Verified Host
-                    </span>
-                  )}
-                </div>
-
-                {/* Review Text */}
-                <p className="text-xs sm:text-sm text-charcoal/85 leading-relaxed italic mb-6">
-                  &ldquo;{item.text}&rdquo;
-                </p>
-              </div>
-
-              {/* Author & Event Info */}
-              <div className="pt-4 border-t border-charcoal/10 space-y-1">
-                <h3 className="font-serif font-bold text-base text-maroon">
-                  {item.name}
-                </h3>
-                <p className="text-xs font-medium text-charcoal/70">
-                  {item.role}
-                </p>
-                <div className="flex flex-wrap items-center gap-2 text-[11px] text-charcoal/55 pt-1">
-                  <span>{item.eventType}</span>
-                  <span>•</span>
-                  <span>{item.location}</span>
-                  <span>•</span>
-                  <span>{item.date}</span>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+        <TestimonialsFeed initialTestimonials={testimonialsData} />
       </section>
 
       {/* CTA Band */}
