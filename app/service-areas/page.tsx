@@ -2,10 +2,10 @@ import React from "react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { MapPin, ArrowRight, Sparkles, Building2 } from "lucide-react";
+import { MapPin, ArrowRight } from "lucide-react";
 import { serviceAreasData } from "@/data/service-areas";
-import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
-import { Button } from "@/components/ui/Button";
+import { PageHero } from "@/components/layout/PageHero";
+import { Eyebrow } from "@/components/ui/Eyebrow";
 import { RelatedPages } from "@/components/ui/RelatedPages";
 
 export const metadata: Metadata = {
@@ -22,36 +22,35 @@ export const metadata: Metadata = {
 export default function ServiceAreasPage() {
   return (
     <div className="flex flex-col w-full pb-20">
-      {/* Header */}
-      <section className="bg-maroon text-cream pt-28 pb-14 md:pt-36 md:pb-20 text-center relative overflow-hidden">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10 space-y-4">
-          <Breadcrumbs
-            items={[{ label: "Service Areas" }]}
-            className="text-cream/70 justify-center mb-2 px-0"
-          />
+      {/* Standard PageHero matching the rest of the website */}
+      <PageHero
+        title="Service Locations"
+        breadcrumb="Service Areas"
+        badge="Mumbai • Thane • Navi Mumbai • Pune • Goa"
+        imageSrc="https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&crop=top&w=1920&h=750&q=80"
+        bottomColor="var(--cream)"
+      />
 
-          <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-saffron text-charcoal text-xs font-bold uppercase tracking-wider">
-            <MapPin className="w-3.5 h-3.5" />
-            Regional Coverage
-          </span>
-
-          <h1 className="font-serif text-3xl sm:text-5xl font-bold text-white tracking-tight">
+      {/* Intro Header */}
+      <section className="bg-cream pt-10 sm:pt-14 pb-4">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+          <Eyebrow text="REGIONAL COVERAGE" />
+          <h2 className="font-heading font-extrabold text-2xl sm:text-3xl md:text-4xl text-ink mt-1 tracking-tight">
             Catering Service Locations
-          </h1>
-
-          <p className="text-sm sm:text-base text-cream/85 max-w-2xl mx-auto leading-relaxed">
+          </h2>
+          <p className="mt-3 text-xs sm:text-sm md:text-base text-ink/75 max-w-2xl mx-auto leading-relaxed">
             Headquartered in Bandra (East) with a branch in Khar (East), our logistics fleet and mobile kitchen caravans cater throughout the MMR region and destination retreats across Western India.
           </p>
         </div>
       </section>
 
-      {/* 5 Area Cards */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {/* 5 Area Cards Grid */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-16 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {serviceAreasData.map((area) => (
             <div
               key={area.slug}
-              className="group bg-ivory rounded-3xl overflow-hidden border border-charcoal/10 shadow-warm hover:shadow-warm-lg transition-all duration-300 flex flex-col justify-between"
+              className="group rounded-2xl bg-paper border border-ink/10 overflow-hidden shadow-xs hover:shadow-card transition-all duration-300 flex flex-col justify-between"
             >
               <div className="relative aspect-[16/10] overflow-hidden">
                 <Image
@@ -61,34 +60,34 @@ export default function ServiceAreasPage() {
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-night/85 via-night/30 to-transparent" />
                 <div className="absolute top-4 left-4">
-                  <span className="px-3 py-1 rounded-full bg-charcoal/80 backdrop-blur-md text-white text-xs font-semibold flex items-center gap-1.5">
-                    <MapPin className="w-3.5 h-3.5 text-turmeric" />
+                  <span className="px-3 py-1 rounded-full bg-night/75 backdrop-blur-md text-white text-xs font-semibold flex items-center gap-1.5 border border-white/10 shadow-xs">
+                    <MapPin className="w-3.5 h-3.5 text-amber-400" />
                     {area.state}
                   </span>
                 </div>
                 <div className="absolute bottom-4 left-4 right-4">
-                  <h2 className="font-serif font-bold text-2xl text-white">
+                  <h3 className="font-heading font-extrabold text-2xl text-white tracking-tight">
                     {area.name}
-                  </h2>
+                  </h3>
                 </div>
               </div>
 
               <div className="p-6 sm:p-7 flex-1 flex flex-col justify-between">
                 <div>
-                  <p className="text-xs sm:text-sm text-charcoal/80 line-clamp-3 leading-relaxed mb-4">
+                  <p className="text-xs sm:text-sm text-ink/75 line-clamp-3 leading-relaxed mb-4">
                     {area.description}
                   </p>
 
-                  <div className="space-y-1.5 pt-3 border-t border-charcoal/10">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-charcoal/50 block">
+                  <div className="space-y-1.5 pt-3 border-t border-ink/5">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-ink/50 block mb-1">
                       Popular Venues:
                     </span>
-                    <ul className="text-xs text-charcoal/70 space-y-1">
+                    <ul className="text-xs text-ink/70 space-y-1">
                       {area.popularVenues.slice(0, 3).map((v, i) => (
                         <li key={i} className="flex items-center gap-1.5 truncate">
-                          <span className="w-1.5 h-1.5 rounded-full bg-saffron shrink-0" />
+                          <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
                           <span className="truncate">{v}</span>
                         </li>
                       ))}
@@ -96,13 +95,13 @@ export default function ServiceAreasPage() {
                   </div>
                 </div>
 
-                <div className="pt-6 border-t border-charcoal/10 mt-6 flex items-center justify-between">
+                <div className="pt-5 border-t border-ink/5 mt-5 flex items-center justify-between">
                   <Link
                     href={`/service-areas/${area.slug}`}
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-maroon hover:text-charcoal transition-colors group-hover:translate-x-1"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-accent hover:text-accent-dark transition-colors group-hover:translate-x-1"
                   >
                     <span>View {area.name} Catering Details</span>
-                    <ArrowRight className="w-4 h-4" />
+                    <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
               </div>

@@ -3,7 +3,8 @@ import type { Metadata } from "next";
 import { HelpCircle, MessageCircle, Phone, ArrowRight } from "lucide-react";
 import { detailedFaqData, flatFaqList } from "@/data/faq";
 import { siteConfig } from "@/data/site";
-import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { PageHero } from "@/components/layout/PageHero";
+import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Accordion } from "@/components/ui/Accordion";
 import { Button } from "@/components/ui/Button";
 import { RelatedPages } from "@/components/ui/RelatedPages";
@@ -45,24 +46,23 @@ export default function FAQPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* Header */}
-      <section className="bg-maroon text-cream pt-28 pb-14 md:pt-36 md:pb-20 text-center relative overflow-hidden">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10 space-y-4">
-          <Breadcrumbs
-            items={[{ label: "FAQ" }]}
-            className="text-cream/70 justify-center mb-2 px-0"
-          />
+      {/* Standard PageHero matching the rest of the website */}
+      <PageHero
+        title="Frequently Asked Questions"
+        breadcrumb="FAQ"
+        badge="Knowledge Base & Catering Guidelines"
+        imageSrc="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&crop=top&w=1920&h=750&q=80"
+        bottomColor="var(--cream)"
+      />
 
-          <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-saffron text-charcoal text-xs font-bold uppercase tracking-wider">
-            <HelpCircle className="w-3.5 h-3.5" />
-            Knowledge Base
-          </span>
-
-          <h1 className="font-serif text-3xl sm:text-5xl font-bold text-white tracking-tight">
-            Frequently Asked Questions
-          </h1>
-
-          <p className="text-sm sm:text-base text-cream/85 max-w-2xl mx-auto leading-relaxed">
+      {/* Intro Header */}
+      <section className="bg-cream pt-10 sm:pt-14 pb-4">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+          <Eyebrow text="KNOWLEDGE BASE" />
+          <h2 className="font-heading font-extrabold text-2xl sm:text-3xl md:text-4xl text-ink mt-1 tracking-tight">
+            Common Inquiries &amp; Policies
+          </h2>
+          <p className="mt-3 text-xs sm:text-sm md:text-base text-ink/75 max-w-2xl mx-auto leading-relaxed">
             Everything you need to know about reserving Nanda Caterers, tailoring regional menus, booking tasting sessions, and banquet logistics.
           </p>
         </div>

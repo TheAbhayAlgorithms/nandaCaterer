@@ -14,7 +14,8 @@ import {
 } from "lucide-react";
 import { serviceAreasData, getServiceArea } from "@/data/service-areas";
 import { siteConfig } from "@/data/site";
-import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { PageHero } from "@/components/layout/PageHero";
+import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Button } from "@/components/ui/Button";
 import { RelatedPages } from "@/components/ui/RelatedPages";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
@@ -65,58 +66,39 @@ export default async function ServiceAreaDetailPage({ params }: AreaPageProps) {
 
   return (
     <div className="flex flex-col w-full pb-20">
-      {/* Hero Header */}
-      <section className="relative overflow-hidden bg-maroon-dark text-cream pt-28 pb-16 md:pt-36 md:pb-24">
-        <div className="absolute inset-0 z-0">
-          <Image
-            src={area.image}
-            alt={`${area.name} Catering`}
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover filter brightness-[0.3]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-maroon-dark/85 to-maroon/70" />
-        </div>
+      {/* Standard PageHero */}
+      <PageHero
+        title={`Catering in ${area.name}`}
+        breadcrumb={area.name}
+        badge={`${area.name}, ${area.state}`}
+        imageSrc={area.image}
+        bottomColor="var(--cream)"
+      />
 
-        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 z-10 space-y-4">
-          <Breadcrumbs
-            items={[
-              { label: "Service Areas", href: "/service-areas" },
-              { label: area.name },
-            ]}
-            className="text-cream/70 mb-4 px-0"
-          />
-
-          <div className="flex items-center gap-2">
-            <span className="px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-white text-xs font-medium flex items-center gap-1.5">
-              <MapPin className="w-3.5 h-3.5 text-turmeric" />
-              {area.name}, {area.state}
-            </span>
-          </div>
-
-          <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-tight">
-            Catering Services in {area.name}
-          </h1>
-
-          <p className="text-base sm:text-lg text-cream/90 max-w-2xl leading-relaxed">
+      {/* Intro Header */}
+      <section className="bg-cream pt-10 sm:pt-14 pb-8 border-b border-ink/10">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-3">
+          <Eyebrow text={`${area.name.toUpperCase()} CATERING EXCELLENCE`} />
+          <h2 className="font-heading font-extrabold text-2xl sm:text-4xl text-ink tracking-tight">
             {area.headline}
+          </h2>
+          <p className="text-sm sm:text-base text-ink/75 max-w-2xl mx-auto leading-relaxed">
+            {area.description}
           </p>
-
-          <div className="pt-4 flex flex-wrap items-center gap-4">
+          <div className="pt-4 flex flex-wrap items-center justify-center gap-3">
             <Button
               href={`/quote?location=${encodeURIComponent(area.name)}`}
               variant="primary"
               size="lg"
             >
               <span>Get Pricing for {area.name}</span>
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-4 h-4 ml-1.5" />
             </Button>
             <a
               href={whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 py-3 px-6 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm transition-colors"
+              className="inline-flex items-center gap-2 py-3 px-6 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm transition-colors shadow-soft"
             >
               <MessageCircle className="w-4 h-4" />
               <span>WhatsApp Planner</span>

@@ -1,6 +1,7 @@
 import React, { Suspense } from "react";
 import type { Metadata } from "next";
-import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { PageHero } from "@/components/layout/PageHero";
+import { Eyebrow } from "@/components/ui/Eyebrow";
 import { QuoteWizard } from "@/components/quote/QuoteWizard";
 import { RelatedPages } from "@/components/ui/RelatedPages";
 
@@ -18,17 +19,23 @@ export const metadata: Metadata = {
 export default function QuotePage() {
   return (
     <div className="flex flex-col w-full pb-20">
-      {/* Header */}
-      <section className="bg-maroon text-cream pt-28 pb-12 md:pt-36 md:pb-16 text-center relative overflow-hidden">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10 space-y-3">
-          <Breadcrumbs
-            items={[{ label: "Connect" }]}
-            className="text-cream/70 justify-center mb-2 px-0"
-          />
-          <h1 className="font-serif text-3xl sm:text-5xl font-bold text-white tracking-tight">
-            Event Pricing Wizard
-          </h1>
-          <p className="text-sm sm:text-base text-cream/85 max-w-xl mx-auto">
+      {/* Standard PageHero matching the rest of the website */}
+      <PageHero
+        title="Event Pricing Wizard"
+        breadcrumb="Pricing"
+        badge="Instant Per-Plate Estimate"
+        imageSrc="https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&crop=top&w=1920&h=750&q=80"
+        bottomColor="var(--cream)"
+      />
+
+      {/* Intro Header */}
+      <section className="bg-cream pt-10 sm:pt-14 pb-4">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+          <Eyebrow text="INTERACTIVE ESTIMATOR" />
+          <h2 className="font-heading font-extrabold text-2xl sm:text-3xl md:text-4xl text-ink mt-1 tracking-tight">
+            Calculate Your Catering Investment
+          </h2>
+          <p className="mt-3 text-xs sm:text-sm md:text-base text-ink/75 max-w-xl mx-auto leading-relaxed">
             Calculate your estimated per-plate investment, specify dietary requirements, and receive a formal breakdown directly from our master planners.
           </p>
         </div>

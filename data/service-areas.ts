@@ -33,7 +33,7 @@ export const serviceAreasData: ServiceArea[] = [
       "Live tandoor and chaat counters suitable for indoor and terrace venues",
     ],
     typicalEvents: ["Grand Wedding Receptions", "Sangeet & Mehendi", "BKC Corporate Luncheons", "Griha Pravesh Poojas"],
-    image: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/gujarati-kathiyawadi.jpg",
   },
   {
     slug: "thane",
