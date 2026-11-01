@@ -116,27 +116,35 @@ export function EnquiryForm({ className = "" }: { className?: string }) {
 
   // Build the exact WhatsApp text
   const buildMessageText = () => {
+    const divider = "--------------------------------------------------";
     const lines = [
-      "*NEW CATERING ENQUIRY*",
-      "*Nanda Caterers - Mumbai*",
-      "____________________________________",
-      `*Name:* ${formData.name.trim() || "Guest"}`,
-      `*Phone:* ${formData.phone.trim()}`,
-      `*Occasion:* ${formData.eventType}`,
-      `*Menu Preference:* ${formData.menuPreference}`,
-      `*Event Date:* ${effectiveDate}`,
-      `*Estimated Guests:* ${effectiveGuests}`,
-      `*Venue / City:* ${formData.city.trim() || "Mumbai"}`,
+      divider,
+      "*NANDA CATERERS - CATERING ENQUIRY*",
+      divider,
+      `>> *Client Name:* ${formData.name.trim() || "Guest"}`,
+      `>> *Contact Phone:* ${formData.phone.trim()}`,
     ];
 
+    lines.push(`>> *Catering Service:* ${formData.eventType}`);
+
+    if (effectiveDate) {
+      lines.push(`>> *Event Date:* ${effectiveDate}`);
+    }
+    if (effectiveGuests) {
+      lines.push(`>> *Estimated Guests:* ${effectiveGuests}`);
+    }
+    if (formData.city && formData.city.trim()) {
+      lines.push(`>> *Event Location:* ${formData.city.trim()}`);
+    }
+    if (formData.menuPreference) {
+      lines.push(`>> *Menu Preference:* ${formData.menuPreference}`);
+    }
     if (formData.specialRequests && formData.specialRequests.trim()) {
-      lines.push("");
-      lines.push(`*Special Notes:*`);
-      lines.push(`_${formData.specialRequests.trim()}_`);
+      lines.push(`>> *Special Notes:* ${formData.specialRequests.trim()}`);
     }
 
-    lines.push("____________________________________");
-    lines.push("_Sent from nandacaterers.com_");
+    lines.push(divider);
+    lines.push("_Submitted via nandacaterers.com_");
     return lines.join("\n");
   };
 

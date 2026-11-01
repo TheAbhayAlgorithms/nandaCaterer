@@ -36,6 +36,7 @@ export function ConnectContent() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
   const [service, setService] = useState("Wedding");
   const [location, setLocation] = useState("");
   const [eventDate, setEventDate] = useState("");
@@ -129,11 +130,13 @@ export function ConnectContent() {
       return;
     }
 
-    // Direct WhatsApp redirect — no server submission or API calls
+    const fullName = [firstName.trim(), lastName.trim()].filter(Boolean).join(" ");
     const waUrl = buildWhatsAppLink({
       firstName: firstName.trim(),
       lastName: lastName.trim(),
+      fullName,
       phone: phone.trim(),
+      email: email.trim() || undefined,
       service,
       location: location.trim() || undefined,
       eventDate: eventDate || undefined,
@@ -157,6 +160,7 @@ export function ConnectContent() {
     setFirstName("");
     setLastName("");
     setPhone("");
+    setEmail("");
     setLocation("");
     setEventDate("");
     setGuests("");
@@ -408,33 +412,52 @@ export function ConnectContent() {
                 </div>
               </div>
 
-              {/* Contact Number */}
-              <div>
-                <label
-                  htmlFor="phone"
-                  className="block text-xs font-semibold uppercase tracking-wider text-charcoal mb-1"
-                >
-                  Contact Number <span className="text-chilli">*</span>
-                </label>
-                <input
-                  id="phone"
-                  type="tel"
-                  value={phone}
-                  onChange={(e) => {
-                    setPhone(e.target.value);
-                    if (errors.phone) {
-                      setErrors((prev) => ({ ...prev, phone: "" }));
-                    }
-                  }}
-                  placeholder="10-digit Mobile (e.g. 98200 12345)"
-                  className={cn(
-                    "w-full px-4 py-2.5 rounded-xl border bg-white text-sm text-charcoal focus:outline-none focus:ring-2 focus:ring-saffron transition-all",
-                    errors.phone ? "border-chilli ring-1 ring-chilli" : "border-charcoal/20"
+              {/* Contact Phone & Email Address */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label
+                    htmlFor="phone"
+                    className="block text-xs font-semibold uppercase tracking-wider text-charcoal mb-1"
+                  >
+                    Contact Phone <span className="text-chilli">*</span>
+                  </label>
+                  <input
+                    id="phone"
+                    type="tel"
+                    value={phone}
+                    onChange={(e) => {
+                      setPhone(e.target.value);
+                      if (errors.phone) {
+                        setErrors((prev) => ({ ...prev, phone: "" }));
+                      }
+                    }}
+                    placeholder="10-digit Mobile (e.g. 07039145304)"
+                    className={cn(
+                      "w-full px-4 py-2.5 rounded-xl border bg-white text-sm text-charcoal focus:outline-none focus:ring-2 focus:ring-saffron transition-all",
+                      errors.phone ? "border-chilli ring-1 ring-chilli" : "border-charcoal/20"
+                    )}
+                  />
+                  {errors.phone && (
+                    <p className="text-xs text-chilli mt-1">{errors.phone}</p>
                   )}
-                />
-                {errors.phone && (
-                  <p className="text-xs text-chilli mt-1">{errors.phone}</p>
-                )}
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="block text-xs font-semibold uppercase tracking-wider text-charcoal mb-1"
+                  >
+                    Email Address
+                  </label>
+                  <input
+                    id="email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="e.g. krishnasahu1702@gmail.com"
+                    className="w-full px-4 py-2.5 rounded-xl border border-charcoal/20 bg-white text-sm text-charcoal focus:outline-none focus:ring-2 focus:ring-saffron"
+                  />
+                </div>
               </div>
 
               {/* Catering Service & Location */}

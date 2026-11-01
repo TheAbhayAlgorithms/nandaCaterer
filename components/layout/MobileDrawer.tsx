@@ -18,7 +18,6 @@ const navLinks = [
   { name: "Home", href: "/" },
   { name: "About Us", href: "/about" },
   { name: "Food Menu", href: "/menu" },
-  { name: "Catering Packages", href: "/packages" },
   { name: "Photo Gallery", href: "/gallery" },
   { name: "Client Reviews", href: "/testimonials" },
   { name: "Service Areas", href: "/service-areas" },

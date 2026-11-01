@@ -41,7 +41,7 @@ export function MobileBottomBar() {
 
         {/* Connect Button */}
         <Link
-          href="/quote"
+          href="/connect"
           aria-label="Connect with Nanda Caterers"
           className="flex flex-col items-center justify-center py-2 px-1 rounded-xl bg-gold-gradient text-charcoal shadow-sm active:scale-95 transition-transform"
         >
