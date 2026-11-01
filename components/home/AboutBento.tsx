@@ -63,11 +63,11 @@ export function AboutBento() {
               imageAlt="Royal Indian wedding biryani and feast handis"
             />
 
-            {/* Tile 4: Bottom-Right - Royal wedding banquet dinner setup */}
+            {/* Tile 4: Bottom-Right - Royal Indian feast and thali display */}
             <BentoTile
               type="photo"
-              imageSrc="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80"
-              imageAlt="Grand royal wedding banquet dinner setup"
+              imageSrc="/images/gujarati-kathiyawadi.jpg"
+              imageAlt="Royal Indian feast and traditional festive spread"
             />
           </BentoGrid>
         </div>
