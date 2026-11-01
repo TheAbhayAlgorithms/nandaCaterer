@@ -196,6 +196,13 @@ export async function getPublicGalleryImages(): Promise<GalleryImage[]> {
         src?.includes("1544077960")
       ) {
         src = "/images/gujarati-kathiyawadi.jpg";
+      } else if (
+        img.caption?.toLowerCase().includes("dessert buffet") ||
+        img.caption?.toLowerCase().includes("pastry tier") ||
+        img.alt_text?.toLowerCase().includes("dessert table") ||
+        src?.includes("1578474846511")
+      ) {
+        src = "/images/dessert-buffet.jpg";
       }
       return {
         id: img.id,

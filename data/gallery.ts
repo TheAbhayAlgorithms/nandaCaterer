@@ -171,7 +171,7 @@ export const galleryImages: GalleryImage[] = [
   },
   {
     id: "gal-24",
-    src: "https://images.unsplash.com/photo-1578474846511-04ba529f0b88?auto=format&fit=crop&w=1200&q=80",
+    src: "/images/dessert-buffet.jpg",
     alt: "Bespoke Dessert Table and Pastry Tier",
     title: "Artisanal Dessert Buffet Display",
     category: "Food",
