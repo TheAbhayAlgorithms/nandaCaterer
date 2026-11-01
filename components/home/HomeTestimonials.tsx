@@ -16,7 +16,8 @@ export function HomeTestimonials() {
     rating: demoGoogleRating.rating,
     reviewCount: demoGoogleRating.reviewCount,
     mapsUrl: demoGoogleRating.mapsUrl,
-    writeReviewUrl: "https://maps.google.com/?q=Nanda+Caterers+Mumbai",
+    reviewsUrl: demoGoogleRating.reviewsUrl,
+    writeReviewUrl: demoGoogleRating.writeReviewUrl,
     reviews: demoTestimonials.map((item, index) => ({
       id: item.id || `fallback-${index}`,
       name: item.name,
@@ -79,7 +80,7 @@ export function HomeTestimonials() {
           {/* Google Rating Badge & Action Links */}
           <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
             <a
-              href={data.mapsUrl}
+              href={data.reviewsUrl || data.mapsUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-paper border border-ink/10 shadow-xs hover:shadow-card hover:border-accent/40 transition-all text-xs sm:text-sm text-ink group"
@@ -206,7 +207,7 @@ export function HomeTestimonials() {
         {/* Bottom CTA to view all reviews on Google */}
         <div className="mt-10 flex justify-center">
           <a
-            href={data.mapsUrl}
+            href={data.reviewsUrl || data.mapsUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-ink/20 hover:border-accent text-ink/80 hover:text-accent font-semibold text-xs sm:text-sm transition-all bg-paper shadow-xs"

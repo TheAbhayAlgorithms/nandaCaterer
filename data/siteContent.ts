@@ -14,6 +14,8 @@ export const demoGoogleRating = {
   rating: 4.9,
   reviewCount: 175,
   mapsUrl: "https://maps.google.com/?q=Nanda+Caterers+Bandra+East+Mumbai",
+  reviewsUrl: "https://www.google.com/search?q=Nanda+Caterers+Bandra+East+Mumbai+reviews",
+  writeReviewUrl: "https://www.google.com/search?q=Nanda+Caterers+Bandra+East+Mumbai+write+review",
   isDemo: false,
 };
 

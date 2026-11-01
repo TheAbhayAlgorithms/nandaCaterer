@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Star, CheckCircle2, User, ExternalLink, Edit3 } from "lucide-react";
 import type { StandardReview, ReviewsResponse } from "@/app/api/reviews/route";
 import { testimonialsData, Testimonial } from "@/data/testimonials";
+import { demoGoogleRating } from "@/data/siteContent";
 
 interface TestimonialsFeedProps {
   initialTestimonials?: Testimonial[];
@@ -29,12 +30,14 @@ export function TestimonialsFeed({ initialTestimonials = testimonialsData }: Tes
     rating: number;
     reviewCount: number;
     mapsUrl: string;
+    reviewsUrl: string;
     writeReviewUrl: string;
   }>({
-    rating: 4.9,
-    reviewCount: 175,
-    mapsUrl: "https://maps.google.com/?q=Nanda+Caterers+Bandra+East+Mumbai",
-    writeReviewUrl: "https://maps.google.com/?q=Nanda+Caterers+Bandra+East+Mumbai",
+    rating: demoGoogleRating.rating,
+    reviewCount: demoGoogleRating.reviewCount,
+    mapsUrl: demoGoogleRating.mapsUrl,
+    reviewsUrl: demoGoogleRating.reviewsUrl,
+    writeReviewUrl: demoGoogleRating.writeReviewUrl,
   });
 
   useEffect(() => {
@@ -49,6 +52,7 @@ export function TestimonialsFeed({ initialTestimonials = testimonialsData }: Tes
               rating: data.rating,
               reviewCount: data.reviewCount,
               mapsUrl: data.mapsUrl,
+              reviewsUrl: data.reviewsUrl || demoGoogleRating.reviewsUrl,
               writeReviewUrl: data.writeReviewUrl,
             });
 
@@ -91,15 +95,22 @@ export function TestimonialsFeed({ initialTestimonials = testimonialsData }: Tes
     <div className="space-y-10">
       {/* Action banner: Live Google rating & Write a Review */}
       <div className="flex flex-wrap items-center justify-between gap-4 p-4 sm:p-5 rounded-2xl bg-paper border border-ink/10 shadow-xs">
-        <div className="flex items-center gap-3">
+        <a
+          href={googleMeta.reviewsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-3 group hover:opacity-85 transition-opacity"
+          aria-label={`Google Rating ${googleMeta.rating.toFixed(1)} from ${googleMeta.reviewCount}+ Google Reviews`}
+        >
           <div className="flex items-center text-amber-500">
             {[...Array(5)].map((_, i) => (
               <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
             ))}
           </div>
           <span className="font-bold text-sm text-ink">{googleMeta.rating.toFixed(1)} / 5.0</span>
-          <span className="text-xs text-ink/60">({googleMeta.reviewCount}+ Google Reviews)</span>
-        </div>
+          <span className="text-xs text-ink/60 group-hover:text-accent transition-colors">({googleMeta.reviewCount}+ Google Reviews)</span>
+          <ExternalLink className="w-3 h-3 text-ink/40 group-hover:text-accent transition-colors" />
+        </a>
 
         <div className="flex items-center gap-3">
           <a
@@ -112,7 +123,7 @@ export function TestimonialsFeed({ initialTestimonials = testimonialsData }: Tes
             <span>Write a Google Review</span>
           </a>
           <a
-            href={googleMeta.mapsUrl}
+            href={googleMeta.reviewsUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-paper border border-ink/15 hover:border-accent text-xs font-semibold text-ink/80 hover:text-accent transition-all"

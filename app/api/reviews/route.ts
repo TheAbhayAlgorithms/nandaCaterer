@@ -17,6 +17,7 @@ export interface ReviewsResponse {
   rating: number;
   reviewCount: number;
   mapsUrl: string;
+  reviewsUrl: string;
   writeReviewUrl: string;
   reviews: StandardReview[];
   source: "google" | "fallback";
@@ -59,9 +60,12 @@ export async function GET(request: Request) {
     rating: demoGoogleRating.rating,
     reviewCount: demoGoogleRating.reviewCount,
     mapsUrl: demoGoogleRating.mapsUrl,
+    reviewsUrl: placeId
+      ? `https://search.google.com/local/reviews?placeid=${placeId}`
+      : demoGoogleRating.reviewsUrl,
     writeReviewUrl: placeId
       ? `https://search.google.com/local/writereview?placeid=${placeId}`
-      : demoGoogleRating.mapsUrl,
+      : demoGoogleRating.writeReviewUrl,
     reviews: fallbackReviews,
     source: "fallback",
   };
@@ -126,6 +130,9 @@ export async function GET(request: Request) {
       rating: result.rating || demoGoogleRating.rating,
       reviewCount: result.user_ratings_total || demoGoogleRating.reviewCount,
       mapsUrl: result.url || demoGoogleRating.mapsUrl,
+      reviewsUrl: placeId
+        ? `https://search.google.com/local/reviews?placeid=${placeId}`
+        : demoGoogleRating.reviewsUrl,
       writeReviewUrl: `https://search.google.com/local/writereview?placeid=${placeId}`,
       reviews: combinedReviews.length > 0 ? combinedReviews : fallbackReviews,
       source: googleReviews.length > 0 ? "google" : "fallback",
