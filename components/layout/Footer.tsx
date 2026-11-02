@@ -97,15 +97,16 @@ export function Footer() {
             </h4>
             <div className="space-y-3 text-xs sm:text-sm text-white/70">
               <div className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 text-accent shrink-0 mt-0.5" />
+                <MapPin className="w-4 h-4 text-accent shrink-0 mt-[3px]" />
                 <span className="leading-relaxed">{siteConfig.offices[0].address}</span>
               </div>
-              <div className="flex items-center gap-2.5">
+              <a
+                href={`tel:${siteConfig.phone.raw}`}
+                className="flex items-center gap-2.5 min-h-0 text-white/70 hover:text-white transition-colors"
+              >
                 <Phone className="w-4 h-4 text-accent shrink-0" />
-                <a href={`tel:${siteConfig.phone.raw}`} className="hover:text-white transition-colors">
-                  {siteConfig.phone.display}
-                </a>
-              </div>
+                <span className="leading-5">{siteConfig.phone.display}</span>
+              </a>
             </div>
           </div>
 
@@ -115,14 +116,14 @@ export function Footer() {
               Working Hours
             </h4>
             <div className="space-y-3 text-xs sm:text-sm text-white/70">
-              <div className="flex items-start gap-2.5">
-                <Clock className="w-4 h-4 text-accent shrink-0 mt-0.5" />
-                <div>
-                  <p>{siteConfig.workingHours.days}</p>
-                  <p className="font-semibold text-white/90 mt-0.5">
-                    {siteConfig.workingHours.time}
-                  </p>
+              <div>
+                <div className="flex items-center gap-2.5">
+                  <Clock className="w-4 h-4 text-accent shrink-0" />
+                  <span className="leading-5">{siteConfig.workingHours.days}</span>
                 </div>
+                <p className="font-semibold text-white/90 pl-[26px] mt-1 leading-5">
+                  {siteConfig.workingHours.time}
+                </p>
               </div>
             </div>
           </div>
