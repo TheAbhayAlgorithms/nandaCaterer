@@ -42,6 +42,14 @@
   font-feature-settings: "lnum" 1, "tnum" 1;
 }
 
+/* SF Pro Display Bold for Counting Numbers */
+.font-sf-pro-bold {
+  font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "SF Pro", "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  font-weight: 700;
+  font-feature-settings: "lnum" 1, "tnum" 1;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
 /* Prevent iOS auto-zoom on input focus:
    iOS Safari automatically zooms the screen on inputs with font-size < 16px.
    Enforcing 16px font-size on mobile inputs disables this auto-zoom and keeps behavior normal. */

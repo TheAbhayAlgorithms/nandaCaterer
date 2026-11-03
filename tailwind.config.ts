@@ -40,6 +40,16 @@ const config: Config = {
         poppins: ["var(--font-poppins)", "sans-serif"],
         accent: ["var(--font-caveat)", "cursive"],
         lora: ["var(--font-lora)", "serif"],
+        sfPro: [
+          '"SF Pro Display"',
+          "-apple-system",
+          "BlinkMacSystemFont",
+          '"SF Pro"',
+          '"Segoe UI"',
+          "Roboto",
+          '"Helvetica Neue"',
+          "sans-serif",
+        ],
       },
       boxShadow: {
         soft: "0 6px 24px -10px rgba(60, 20, 10, 0.18)",

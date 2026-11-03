@@ -39,7 +39,13 @@ export function StatsSection() {
                     <Icon className="w-6 h-6" />
                   </div>
 
-                  <div className="font-lora font-bold text-4xl sm:text-5xl lg:text-6xl text-white tracking-tight mb-1">
+                  <div
+                    className="font-sf-pro-bold font-bold text-4xl sm:text-5xl lg:text-6xl text-white tracking-tight mb-1"
+                    style={{
+                      fontFamily: '"SF Pro Display", -apple-system, BlinkMacSystemFont, "SF Pro", "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
+                      fontWeight: 700,
+                    }}
+                  >
                     <Counter value={stat.value} suffix={stat.suffix} />
                   </div>
 

@@ -11,6 +11,7 @@ interface CounterProps {
   duration?: number;
   className?: string;
   startValue?: number;
+  style?: React.CSSProperties;
 }
 
 export function Counter({
@@ -21,6 +22,7 @@ export function Counter({
   duration = 1.8,
   className,
   startValue = 1,
+  style,
 }: CounterProps) {
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.1 });
@@ -59,7 +61,7 @@ export function Counter({
     count === 1 && singularSuffix ? singularSuffix : suffix;
 
   return (
-    <span ref={ref} className={className}>
+    <span ref={ref} className={className} style={style}>
       {prefix}
       {count.toLocaleString()}
       {activeSuffix}
