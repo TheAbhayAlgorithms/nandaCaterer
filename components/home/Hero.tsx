@@ -47,7 +47,18 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="font-heading font-extrabold text-white text-3xl sm:text-5xl md:text-6xl lg:text-[4rem] leading-[1.12] tracking-tight mb-6 max-w-3xl"
         >
-          A Perfect Blend of <span className="italic text-accent">Sensational</span> Food
+          A Perfect Blend of{" "}
+          <span
+            className="italic text-accent inline-block"
+            style={{
+              WebkitTextStroke: "1.5px #ffffff",
+              paintOrder: "stroke fill",
+              filter: "drop-shadow(0 2px 8px rgba(0,0,0,0.4))",
+            }}
+          >
+            Sensational
+          </span>{" "}
+          Food
         </motion.h1>
 
         {/* Outlined pill button "Explore Menu" with shimmer effect */}
