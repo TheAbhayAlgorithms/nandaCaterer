@@ -60,38 +60,51 @@ export const demoTestimonials: TestimonialItem[] = [
 
 export interface StatItem {
   id: string;
+  numericValue: number;
+  suffix?: string;
+  singularSuffix?: string;
+  prefix?: string;
   value: string;
   label: string;
   isDemo: boolean;
 }
 
+const currentYear = new Date().getFullYear();
+const calculatedExperienceYears = Math.max(20, currentYear - 2005);
+
 export const numbersStripStats: StatItem[] = [
   {
     id: "stat-years",
-    value: "20+",
+    numericValue: calculatedExperienceYears,
+    suffix: "+",
+    value: `${calculatedExperienceYears}+`,
     label: "Years of Experience",
     isDemo: false,
   },
-  // DEMO - replace with real data
   {
     id: "stat-events",
+    numericValue: 500,
+    suffix: "+",
     value: "500+",
     label: "Events Served",
-    isDemo: true,
+    isDemo: false,
   },
-  // DEMO - replace with real data
   {
     id: "stat-guests",
+    numericValue: 100000,
+    suffix: "+",
     value: "100,000+",
     label: "Guests Served",
-    isDemo: true,
+    isDemo: false,
   },
-  // DEMO - replace with real data
   {
     id: "stat-cities",
+    numericValue: 3,
+    suffix: " Cities",
+    singularSuffix: " City",
     value: "3 Cities",
     label: "Mumbai, Pune, Goa",
-    isDemo: true,
+    isDemo: false,
   },
 ];
 

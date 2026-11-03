@@ -3,6 +3,7 @@
 import React from "react";
 import { numbersStripStats, SHOW_DEMO_CONTENT } from "@/data/siteContent";
 import { TornEdge } from "@/components/shape/TornEdge";
+import { Counter } from "@/components/ui/Counter";
 
 export function NumbersStrip() {
   const activeStats = numbersStripStats.filter(
@@ -25,9 +26,15 @@ export function NumbersStrip() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 text-center">
           {activeStats.map((stat) => (
             <div key={stat.id} className="flex flex-col items-center">
-              <span className="font-lora font-bold text-2xl sm:text-3xl lg:text-4xl text-accent tracking-tight">
-                {stat.value}
-              </span>
+              <Counter
+                value={stat.numericValue}
+                suffix={stat.suffix}
+                singularSuffix={stat.singularSuffix}
+                prefix={stat.prefix}
+                duration={1.8}
+                startValue={1}
+                className="font-lora font-bold text-2xl sm:text-3xl lg:text-4xl text-accent tracking-tight"
+              />
               <span className="text-xs sm:text-sm font-semibold text-ink mt-1.5 leading-snug">
                 {stat.label}
               </span>
