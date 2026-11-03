@@ -2,15 +2,10 @@
 
 import React from "react";
 import { MessageCircle } from "lucide-react";
-import { buildWhatsAppLink } from "@/lib/whatsapp";
-import { useQuoteSelection } from "@/context/QuoteSelectionContext";
+import { siteConfig } from "@/data/site";
 
 export function WhatsAppFab() {
-  const { selectedDishes } = useQuoteSelection();
-
-  const href = buildWhatsAppLink({
-    selectedDishes: selectedDishes.length > 0 ? selectedDishes : undefined,
-  });
+  const href = siteConfig.whatsappUrl;
 
   return (
     <div className="fixed bottom-6 right-6 z-40 flex items-center gap-3">
@@ -28,9 +23,7 @@ export function WhatsAppFab() {
 
         {/* Tooltip on hover */}
         <div className="absolute right-full mr-3 top-1/2 -translate-y-1/2 hidden md:group-hover:flex items-center px-3 py-1.5 rounded-xl bg-ink text-white text-xs font-medium whitespace-nowrap shadow-md pointer-events-none">
-          {selectedDishes.length > 0
-            ? `Enquire with ${selectedDishes.length} selected dishes`
-            : "Chat on WhatsApp"}
+          Chat on WhatsApp
           <span className="absolute -right-1 top-1/2 -translate-y-1/2 border-4 border-transparent border-l-ink" />
         </div>
       </div>
