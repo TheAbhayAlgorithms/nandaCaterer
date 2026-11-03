@@ -37,26 +37,22 @@ export function Logo({ className, theme = "dark", withLink = true }: LogoProps) 
       <div className="flex flex-col text-left">
         <span
           className={cn(
-            "font-heading font-extrabold text-lg sm:text-xl tracking-tight leading-none transition-colors flex items-baseline gap-1.5",
-            isLight ? "text-white" : "text-ink"
+            "font-heading font-extrabold text-lg sm:text-xl tracking-tight leading-none transition-all",
+            isLight
+              ? "text-transparent bg-clip-text bg-gradient-to-r from-white via-[#FDE68A] to-[#F59E0B] drop-shadow-[0_1px_8px_rgba(232,176,4,0.35)]"
+              : "text-ink"
           )}
         >
-          <span>Nanda</span>
+          Nanda{" "}
           <span
             className={cn(
-              "relative inline-block font-heading font-bold transition-all",
+              "font-heading font-bold transition-all",
               isLight
-                ? "text-transparent bg-clip-text bg-gradient-to-r from-white via-[#FDE68A] to-[#F59E0B] drop-shadow-[0_1px_8px_rgba(232,176,4,0.35)]"
+                ? "text-transparent bg-clip-text bg-gradient-to-r from-[#FDE68A] via-[#F59E0B] to-[#E8A838]"
                 : "text-accent"
             )}
           >
             Caterers
-            {isLight && (
-              <span
-                aria-hidden="true"
-                className="absolute -bottom-1 left-0 right-0 h-[2px] rounded-full bg-gradient-to-r from-[#FDE68A] via-turmeric to-accent opacity-90 shadow-xs"
-              />
-            )}
           </span>
         </span>
         <span
