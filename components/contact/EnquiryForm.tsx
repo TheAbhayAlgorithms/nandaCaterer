@@ -120,7 +120,6 @@ export function EnquiryForm({ className = "" }: { className?: string }) {
     const lines = [
       "👑 *NANDA CATERERS*",
       "🍽️ _A Perfect Blend of Sensational Food_",
-      "🌐 https://nandacaterer.com/logo.png",
       "",
       divider,
       "📋 *NEW CATERING ENQUIRY*",
@@ -148,7 +147,7 @@ export function EnquiryForm({ className = "" }: { className?: string }) {
 
     lines.push(divider);
     lines.push("For more information");
-    lines.push("visit - nandacaterer.com");
+    lines.push("visit - https://nandacaterer.com");
     return lines.join("\n");
   };
 

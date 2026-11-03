@@ -23,14 +23,13 @@ export function buildWhatsAppLink(details?: CateringWhatsAppDetails): string {
     const defaultLines = [
       "👑 *NANDA CATERERS*",
       "🍽️ _A Perfect Blend of Sensational Food_",
-      "🌐 https://nandacaterer.com/logo.png",
       "",
       divider,
       "Hello Nanda Caterers! I would like to enquire about your catering services.",
       divider,
       "",
       "For more information",
-      "visit - nandacaterer.com",
+      "visit - https://nandacaterer.com",
     ];
     return `https://wa.me/${baseNumber}?text=${encodeURIComponent(defaultLines.join("\n"))}`;
   }
@@ -48,7 +47,6 @@ export function buildWhatsAppLink(details?: CateringWhatsAppDetails): string {
     const dishesLines: string[] = [
       "👑 *NANDA CATERERS*",
       "🍽️ _A Perfect Blend of Sensational Food_",
-      "🌐 https://nandacaterer.com/logo.png",
       "",
       divider,
       "🍽️ *MENU DISHES SELECTION*",
@@ -66,7 +64,7 @@ export function buildWhatsAppLink(details?: CateringWhatsAppDetails): string {
     dishesLines.push("Please share catering availability and estimate packages for these items.");
     dishesLines.push(divider);
     dishesLines.push("For more information");
-    dishesLines.push("visit - nandacaterer.com");
+    dishesLines.push("visit - https://nandacaterer.com");
 
     return `https://wa.me/${baseNumber}?text=${encodeURIComponent(dishesLines.join("\n"))}`;
   }
@@ -74,7 +72,6 @@ export function buildWhatsAppLink(details?: CateringWhatsAppDetails): string {
   const lines: string[] = [
     "👑 *NANDA CATERERS*",
     "🍽️ _A Perfect Blend of Sensational Food_",
-    "🌐 https://nandacaterer.com/logo.png",
     "",
     divider,
     "📋 *NEW CATERING ENQUIRY*",
@@ -126,7 +123,7 @@ export function buildWhatsAppLink(details?: CateringWhatsAppDetails): string {
 
   lines.push(divider);
   lines.push("For more information");
-  lines.push("visit - nandacaterer.com");
+  lines.push("visit - https://nandacaterer.com");
 
   return `https://wa.me/${baseNumber}?text=${encodeURIComponent(lines.join("\n"))}`;
 }
