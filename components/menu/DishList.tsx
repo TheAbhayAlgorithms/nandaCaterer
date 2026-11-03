@@ -130,13 +130,13 @@ export function DishList({ dishes, searchQuery, sectionTitle }: DishListProps) {
                   </div>
 
                   {description && (
-                    <p className="text-xs text-ink/70 mt-1 line-clamp-3 leading-relaxed pl-4">
+                    <p className="text-xs text-ink/70 mt-1 line-clamp-3 leading-relaxed">
                       {description}
                     </p>
                   )}
 
                   {/* Chips: Extra Rs.30/- or Jain/Popular */}
-                  <div className="flex flex-wrap items-center gap-1.5 mt-2 pl-4">
+                  <div className="flex flex-wrap items-center gap-1.5 mt-2">
                     {hasExtraNote && (
                       <span className="text-[10px] font-bold uppercase tracking-wider text-accent bg-peach px-2 py-0.5 rounded-full border border-accent/20">
                         Extra Rs.30/-

@@ -102,7 +102,7 @@ export function DishItem({ name, dish, searchQuery, className }: DishItemProps) 
 
       {/* Description & Tags if available */}
       {(dish || description) && (
-        <div className="pl-4 mt-1 space-y-1">
+        <div className="mt-1 space-y-1">
           {description && (
             <p className="text-[11px] text-charcoal/65 leading-relaxed line-clamp-3">
               {description}
