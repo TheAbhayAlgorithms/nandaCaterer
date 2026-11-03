@@ -34,12 +34,20 @@ export function Logo({ className, theme = "dark", withLink = true }: LogoProps) 
             isLight ? "text-white" : "text-ink"
           )}
         >
-          Nanda <span className="text-accent font-medium">Caterers</span>
+          Nanda{" "}
+          <span
+            className={cn(
+              "font-bold transition-colors",
+              isLight ? "text-white" : "text-accent"
+            )}
+          >
+            Caterers
+          </span>
         </span>
         <span
           className={cn(
             "text-[9px] uppercase tracking-[0.2em] font-semibold leading-none mt-1 transition-colors",
-            isLight ? "text-white/70" : "text-ink/60"
+            isLight ? "text-white/80" : "text-ink/60"
           )}
         >
           Mumbai • Since 2005
