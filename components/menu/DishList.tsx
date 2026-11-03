@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Plus, Check, Sparkles } from "lucide-react";
 import { useQuoteSelection } from "@/context/QuoteSelectionContext";
 import { Dish } from "@/data/menu";
-import { getSoupDemoDescription } from "@/data/siteContent";
+import { getDishDescription } from "@/data/dishDescriptions";
 import { cn } from "@/lib/cn";
 
 interface DishListProps {
@@ -88,7 +88,7 @@ export function DishList({ dishes, searchQuery, sectionTitle }: DishListProps) {
             dish.extraPriceNote;
 
           const cleanName = dish.name.replace(/\(Extra Rs\.30\/-\)/gi, "").trim();
-          const description = dish.description || getSoupDemoDescription(dish.name);
+          const description = dish.description || getDishDescription(cleanName) || getDishDescription(dish.name);
 
           return (
             <div
@@ -130,7 +130,7 @@ export function DishList({ dishes, searchQuery, sectionTitle }: DishListProps) {
                   </div>
 
                   {description && (
-                    <p className="text-xs text-ink/70 mt-1 line-clamp-2 leading-relaxed pl-4">
+                    <p className="text-xs text-ink/70 mt-1 line-clamp-3 leading-relaxed pl-4">
                       {description}
                     </p>
                   )}

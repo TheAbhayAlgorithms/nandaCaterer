@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Plus, Check, Sparkles, Flame } from "lucide-react";
 import { useQuoteSelection } from "@/context/QuoteSelectionContext";
 import { Dish } from "@/data/menu";
-import { getSoupDemoDescription } from "@/data/siteContent";
+import { getDishDescription } from "@/data/dishDescriptions";
 import { cn } from "@/lib/cn";
 
 interface DishItemProps {
@@ -22,7 +22,7 @@ export function DishItem({ name, dish, searchQuery, className }: DishItemProps) 
   // Check for special notes
   const hasExtraCharge = name.includes("(Extra Rs.30/-)") || !!dish?.extraPriceNote;
   const cleanName = name.replace("(Extra Rs.30/-)", "").trim();
-  const description = dish?.description || getSoupDemoDescription(cleanName) || getSoupDemoDescription(name);
+  const description = dish?.description || getDishDescription(cleanName) || getDishDescription(name);
 
   // Render text with search highlight if applicable
   const renderHighlightedName = (text: string, query?: string) => {
@@ -104,7 +104,7 @@ export function DishItem({ name, dish, searchQuery, className }: DishItemProps) 
       {(dish || description) && (
         <div className="pl-4 mt-1 space-y-1">
           {description && (
-            <p className="text-[11px] text-charcoal/65 leading-tight line-clamp-1">
+            <p className="text-[11px] text-charcoal/65 leading-relaxed line-clamp-3">
               {description}
             </p>
           )}
