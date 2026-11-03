@@ -10,9 +10,10 @@ import { useQuoteSelection } from "@/context/QuoteSelectionContext";
 export function MobileBottomBar() {
   const { selectedDishes } = useQuoteSelection();
 
-  const whatsappHref = buildWhatsAppLink({
-    selectedDishes: selectedDishes.length > 0 ? selectedDishes : undefined,
-  });
+  const whatsappHref =
+    selectedDishes.length > 0
+      ? buildWhatsAppLink({ selectedDishes })
+      : siteConfig.whatsappUrl;
 
   return (
     <div className="fixed bottom-0 inset-x-0 z-40 lg:hidden bg-ivory/95 backdrop-blur-md border-t border-turmeric/30 shadow-[0_-4px_20px_rgba(0,0,0,0.08)] py-2 px-3 safe-bottom">
