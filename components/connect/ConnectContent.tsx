@@ -12,7 +12,6 @@ import {
   Utensils,
   X,
   CheckCircle2,
-  ShieldCheck,
 } from "lucide-react";
 import { siteConfig } from "@/data/site";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
@@ -253,11 +252,6 @@ export function ConnectContent() {
                 </span>
               </div>
             </div>
-          </div>
-
-          <div className="pt-4 border-t border-white/15 text-xs text-cream/75 flex items-center gap-2">
-            <ShieldCheck className="w-4 h-4 text-turmeric shrink-0" />
-            <span>Direct WhatsApp response within 30 minutes during hours.</span>
           </div>
         </div>
       </div>
