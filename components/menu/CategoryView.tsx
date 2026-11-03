@@ -125,10 +125,6 @@ export function CategoryView({ category }: CategoryViewProps) {
               <h2 className="font-heading font-bold text-2xl sm:text-3xl text-ink mt-1">
                 {activeSection?.title}
               </h2>
-              <Divider align="center" className="my-2" />
-              <p className="text-xs text-ink/60">
-                {activeSection?.dishes.length} hand-crafted delicacies prepared fresh
-              </p>
             </div>
 
             {activeSection && (
