@@ -125,9 +125,9 @@ export const servicesData: ServiceItem[] = [
 // Why Nanda Caterers 4-icon items per Section 9.2
 export const whyChooseUs = [
   {
-    title: "Fast Delivery",
+    title: "Punctuality",
     desc: "Punctual setup and prompt table replenishment at your venue.",
-    icon: "delivery",
+    icon: "punctual",
   },
   {
     title: "Professional Team",

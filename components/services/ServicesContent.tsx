@@ -5,10 +5,11 @@ import { ServiceCard } from "./ServiceCard";
 import { ServiceModal } from "./ServiceModal";
 import { servicesData, ServiceItem, whyChooseUs, commitmentStatement } from "@/data/services";
 import { NextStepStrip } from "@/components/shape/NextStepStrip";
-import { Truck, Users, CalendarCheck, ShieldCheck } from "lucide-react";
+import { Clock, Users, CalendarCheck, ShieldCheck } from "lucide-react";
 
 const whyIconMap = {
-  delivery: Truck,
+  punctual: Clock,
+  delivery: Clock,
   team: Users,
   booking: CalendarCheck,
   quality: ShieldCheck,
