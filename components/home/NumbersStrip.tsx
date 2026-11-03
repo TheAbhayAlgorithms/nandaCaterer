@@ -33,10 +33,10 @@ export function NumbersStrip() {
                 prefix={stat.prefix}
                 duration={1.8}
                 startValue={1}
-                className="font-sf-pro-bold font-bold text-2xl sm:text-3xl lg:text-4xl text-accent tracking-tight"
+                className="font-sf-pro-bold font-extrabold text-2xl sm:text-3xl lg:text-4xl text-accent tracking-tight"
                 style={{
                   fontFamily: '"SF Pro Display", -apple-system, BlinkMacSystemFont, "SF Pro", "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
-                  fontWeight: 700,
+                  fontWeight: 800,
                 }}
               />
               <span className="text-xs sm:text-sm font-semibold text-ink mt-1.5 leading-snug">

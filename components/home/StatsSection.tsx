@@ -40,10 +40,10 @@ export function StatsSection() {
                   </div>
 
                   <div
-                    className="font-sf-pro-bold font-bold text-4xl sm:text-5xl lg:text-6xl text-white tracking-tight mb-1"
+                    className="font-sf-pro-bold font-extrabold text-4xl sm:text-5xl lg:text-6xl text-white tracking-tight mb-1"
                     style={{
                       fontFamily: '"SF Pro Display", -apple-system, BlinkMacSystemFont, "SF Pro", "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
-                      fontWeight: 700,
+                      fontWeight: 800,
                     }}
                   >
                     <Counter value={stat.value} suffix={stat.suffix} />

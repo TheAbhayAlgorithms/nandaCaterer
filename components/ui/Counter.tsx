@@ -61,7 +61,16 @@ export function Counter({
     count === 1 && singularSuffix ? singularSuffix : suffix;
 
   return (
-    <span ref={ref} className={className} style={style}>
+    <span
+      ref={ref}
+      className={`font-sf-pro-bold font-extrabold ${className || ""}`}
+      style={{
+        fontFamily:
+          '"SF Pro Display", -apple-system, BlinkMacSystemFont, "SF Pro", "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
+        fontWeight: 800,
+        ...style,
+      }}
+    >
       {prefix}
       {count.toLocaleString()}
       {activeSuffix}
