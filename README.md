@@ -112,7 +112,7 @@ All content is strictly isolated under `/data`:
 3. Configure Environment Variables:
    - `RESEND_API_KEY`
    - `QUOTE_TO_EMAIL`
-   - `NEXT_PUBLIC_SITE_URL` (e.g., `https://nandacaterers.com`)
+   - `NEXT_PUBLIC_SITE_URL` (e.g., `https://nandacaterer.com`)
 4. Click **"Deploy"**.
 
 ---
@@ -122,7 +122,7 @@ All content is strictly isolated under `/data`:
 Please review and confirm these items before going live:
 
 1. **Confirm Email Spelling**:
-   - The original website listed `info@nandacateres.com` (missing the second 'r'). Confirm whether this typo inbox is active or if `info@nandacaterers.com` should be used. Configured in `data/site.ts`.
+   - The original website listed `info@nandacateres.com` (missing the second 'r'). Confirm whether this typo inbox is active or if `info@nandacaterer.com` should be used. Configured in `data/site.ts`.
 2. **Replace Placeholder Crew & Testimonials**:
    - `data/about.ts`: Replace the 3 role-based placeholder cards (Head Chef, Event Manager, Kitchen Lead) with actual team members.
    - `data/testimonials.ts`: Replace placeholder reviews with real client testimonials.

@@ -60,7 +60,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://nandacaterers.com"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://nandacaterer.com"),
   title: {
     default: "Nanda Caterers | Best Wedding Caterers in Mumbai",
     template: "%s | Nanda Caterers – Wedding Caterers in Mumbai",
@@ -80,7 +80,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_IN",
-    url: "https://nandacaterers.com",
+    url: "https://nandacaterer.com",
     siteName: "Nanda Caterers",
     title: "Nanda Caterers – Wedding Caterers in Mumbai",
     description:
@@ -125,7 +125,7 @@ export default function RootLayout({
     name: "Nanda Caterers",
     image: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80",
     telephone: "+91 99678 94979",
-    url: "https://nandacaterers.com",
+    url: "https://nandacaterer.com",
     address: {
       "@type": "PostalAddress",
       streetAddress:

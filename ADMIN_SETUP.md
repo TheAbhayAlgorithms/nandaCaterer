@@ -45,7 +45,7 @@ This guide details the step-by-step procedure to connect Supabase and activate t
 1. In Supabase, navigate to **Authentication** -> **Users**.
 2. Click **Add user** -> **Create user**.
 3. Enter the business owner's email and a secure password:
-   - **Email**: e.g. `admin@nandacaterers.com`
+   - **Email**: e.g. `admin@nandacaterer.com`
    - **Password**: Your secure password
    - Check **Auto Confirm User?** so the account is active immediately without requiring email verification.
 4. Click **Create user**.
@@ -76,7 +76,7 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
    - `NEXT_PUBLIC_SUPABASE_URL`
    - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
    - `SUPABASE_SERVICE_ROLE_KEY`
-   - `NEXT_PUBLIC_SITE_URL` = `https://nandacaterers.com`
+   - `NEXT_PUBLIC_SITE_URL` = `https://nandacaterer.com`
 4. Apply them to **Production**, **Preview**, and **Development** environments.
 
 ---
@@ -97,7 +97,7 @@ This reads the existing categories and dishes from `data/menu.ts` and photograph
 
 1. Push your changes to Git and deploy on Vercel.
 2. Navigate to your private admin URL:
-   `https://nandacaterers.com/admin`
+   `https://nandacaterer.com/admin`
 3. If not signed in, you will be automatically redirected to `/admin/login`.
 4. Sign in with the credentials created in Step 4.
 

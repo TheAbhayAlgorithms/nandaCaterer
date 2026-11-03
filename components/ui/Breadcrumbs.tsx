@@ -21,7 +21,7 @@ export function Breadcrumbs({ items, className = "" }: BreadcrumbsProps) {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: process.env.NEXT_PUBLIC_SITE_URL || "https://nandacaterers.com",
+        item: process.env.NEXT_PUBLIC_SITE_URL || "https://nandacaterer.com",
       },
       ...items.map((item, index) => ({
         "@type": "ListItem",
@@ -29,7 +29,7 @@ export function Breadcrumbs({ items, className = "" }: BreadcrumbsProps) {
         name: item.label,
         ...(item.href
           ? {
-              item: `${process.env.NEXT_PUBLIC_SITE_URL || "https://nandacaterers.com"}${item.href}`,
+              item: `${process.env.NEXT_PUBLIC_SITE_URL || "https://nandacaterer.com"}${item.href}`,
             }
           : {}),
       })),

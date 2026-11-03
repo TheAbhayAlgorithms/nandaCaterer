@@ -116,35 +116,39 @@ export function EnquiryForm({ className = "" }: { className?: string }) {
 
   // Build the exact WhatsApp text
   const buildMessageText = () => {
-    const divider = "--------------------------------------------------";
+    const divider = "━━━━━━━━━━━━━━━━━━━━━━━━━━━━";
     const lines = [
+      "👑 *NANDA CATERERS*",
+      "🍽️ _A Perfect Blend of Sensational Food_",
+      "🌐 https://nandacaterer.com/logo.png",
+      "",
       divider,
-      "*NANDA CATERERS - CATERING ENQUIRY*",
+      "📋 *NEW CATERING ENQUIRY*",
       divider,
-      `>> *Client Name:* ${formData.name.trim() || "Guest"}`,
-      `>> *Contact Phone:* ${formData.phone.trim()}`,
+      `• 👤 *Client Name:* ${formData.name.trim() || "Valued Client"}`,
+      `• 📞 *Contact Phone:* ${formData.phone.trim()}`,
+      `• 🍽️ *Catering Service:* ${formData.eventType}`,
     ];
 
-    lines.push(`>> *Catering Service:* ${formData.eventType}`);
-
     if (effectiveDate) {
-      lines.push(`>> *Event Date:* ${effectiveDate}`);
+      lines.push(`• 📅 *Event Date:* ${effectiveDate}`);
     }
     if (effectiveGuests) {
-      lines.push(`>> *Estimated Guests:* ${effectiveGuests}`);
+      lines.push(`• 👥 *Estimated Guests:* ${effectiveGuests}`);
     }
     if (formData.city && formData.city.trim()) {
-      lines.push(`>> *Event Location:* ${formData.city.trim()}`);
+      lines.push(`• 📍 *Event Location:* ${formData.city.trim()}`);
     }
     if (formData.menuPreference) {
-      lines.push(`>> *Menu Preference:* ${formData.menuPreference}`);
+      lines.push(`• 🥗 *Menu Preference:* ${formData.menuPreference}`);
     }
     if (formData.specialRequests && formData.specialRequests.trim()) {
-      lines.push(`>> *Special Notes:* ${formData.specialRequests.trim()}`);
+      lines.push(`• 📝 *Special Notes:* ${formData.specialRequests.trim()}`);
     }
 
     lines.push(divider);
-    lines.push("_Submitted via nandacaterers.com_");
+    lines.push("For more information");
+    lines.push("visit - nandacaterer.com");
     return lines.join("\n");
   };
 

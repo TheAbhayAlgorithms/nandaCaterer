@@ -5,7 +5,7 @@ import { serviceAreasData } from "@/data/service-areas";
 import { blogPosts } from "@/data/blog";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || "https://nandacaterers.com";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || "https://nandacaterer.com";
 
   const staticRoutes = [
     { path: "", priority: 1.0, freq: "weekly" as const },

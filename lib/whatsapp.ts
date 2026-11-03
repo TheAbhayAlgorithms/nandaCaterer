@@ -9,6 +9,7 @@ export interface CateringWhatsAppDetails {
   serviceType?: string;
   eventDate?: string;
   guestCount?: string;
+  menuPreference?: string;
   message?: string;
   customMessage?: string;
   selectedDishes?: string[];
@@ -16,61 +17,80 @@ export interface CateringWhatsAppDetails {
 
 export function buildWhatsAppLink(details?: CateringWhatsAppDetails): string {
   const baseNumber = "919967894979";
-  const divider = "--------------------------------------------------";
-  
+  const divider = "━━━━━━━━━━━━━━━━━━━━━━━━━━━━";
+
   if (!details) {
-    const defaultText = "Hello Nanda Caterers! I would like to enquire about your catering services.";
-    return `https://wa.me/${baseNumber}?text=${encodeURIComponent(defaultText)}`;
+    const defaultLines = [
+      "👑 *NANDA CATERERS*",
+      "🍽️ _A Perfect Blend of Sensational Food_",
+      "🌐 https://nandacaterer.com/logo.png",
+      "",
+      divider,
+      "Hello Nanda Caterers! I would like to enquire about your catering services.",
+      divider,
+      "",
+      "For more information",
+      "visit - nandacaterer.com",
+    ];
+    return `https://wa.me/${baseNumber}?text=${encodeURIComponent(defaultLines.join("\n"))}`;
   }
 
   const lines: string[] = [
+    "👑 *NANDA CATERERS*",
+    "🍽️ _A Perfect Blend of Sensational Food_",
+    "🌐 https://nandacaterer.com/logo.png",
+    "",
     divider,
-    "*NANDA CATERERS - CATERING ENQUIRY*",
+    "📋 *NEW CATERING ENQUIRY*",
     divider,
   ];
 
   const clientName =
-    details.fullName ||
-    [details.firstName, details.lastName].filter(Boolean).join(" ") ||
+    details.fullName?.trim() ||
+    [details.firstName, details.lastName].filter(Boolean).join(" ").trim() ||
     "Valued Client";
-  lines.push(`>> *Client Name:* ${clientName}`);
+  lines.push(`• 👤 *Client Name:* ${clientName}`);
 
-  if (details.phone) {
-    lines.push(`>> *Contact Phone:* ${details.phone}`);
+  if (details.phone?.trim()) {
+    lines.push(`• 📞 *Contact Phone:* ${details.phone.trim()}`);
   }
 
-  if (details.email) {
-    lines.push(`>> *Email Address:* ${details.email}`);
+  if (details.email?.trim()) {
+    lines.push(`• ✉️ *Email Address:* ${details.email.trim()}`);
   }
 
-  const srv = details.service || details.serviceType || "Wedding";
-  lines.push(`>> *Catering Service:* ${srv}`);
+  const srv = details.service || details.serviceType || "General Event";
+  lines.push(`• 🍽️ *Catering Service:* ${srv}`);
 
   if (details.eventDate) {
-    lines.push(`>> *Event Date:* ${details.eventDate}`);
+    lines.push(`• 📅 *Event Date:* ${details.eventDate}`);
   }
   if (details.guestCount) {
-    lines.push(`>> *Estimated Guests:* ${details.guestCount}`);
+    lines.push(`• 👥 *Estimated Guests:* ${details.guestCount}`);
   }
-  if (details.location) {
-    lines.push(`>> *Event Location:* ${details.location}`);
+  if (details.location?.trim()) {
+    lines.push(`• 📍 *Event Location:* ${details.location.trim()}`);
+  }
+  if (details.menuPreference?.trim()) {
+    lines.push(`• 🥗 *Menu Preference:* ${details.menuPreference.trim()}`);
   }
 
   const msg = details.message || details.customMessage;
-  if (msg) {
-    lines.push(`>> *Special Notes:* ${msg}`);
+  if (msg?.trim()) {
+    lines.push(`• 📝 *Special Notes:* ${msg.trim()}`);
   }
 
   if (details.selectedDishes && details.selectedDishes.length > 0) {
     lines.push("");
-    lines.push(`*Selected Menu Dishes (${details.selectedDishes.length}):*`);
+    lines.push(`• 🥘 *Selected Menu Dishes (${details.selectedDishes.length}):*`);
     details.selectedDishes.forEach((dish) => {
-      lines.push(`   * ${dish}`);
+      lines.push(`   ▪️ ${dish}`);
     });
   }
 
   lines.push(divider);
-  lines.push("_Submitted via nandacaterers.com_");
+  lines.push("For more information");
+  lines.push("visit - nandacaterer.com");
 
   return `https://wa.me/${baseNumber}?text=${encodeURIComponent(lines.join("\n"))}`;
 }

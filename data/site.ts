@@ -1,7 +1,7 @@
 // Business configuration and facts per Section 9.1
 
 export const SITE_URL =
-  process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL || "https://nandacaterers.com";
+  process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL || "https://nandacaterer.com";
 
 export const siteConfig = {
   name: "Nanda Caterers",
