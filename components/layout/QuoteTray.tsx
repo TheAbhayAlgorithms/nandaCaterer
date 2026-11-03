@@ -4,7 +4,7 @@ import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { UtensilsCrossed, X, Trash2, ArrowRight, MessageCircle, ShoppingCart } from "lucide-react";
 import { useQuoteSelection } from "@/context/QuoteSelectionContext";
-import { buildWhatsAppLink } from "@/lib/whatsapp";
+import { openWhatsApp, getWhatsAppUrl } from "@/lib/whatsapp";
 
 export function QuoteTray() {
   const {
@@ -20,9 +20,10 @@ export function QuoteTray() {
     return null;
   }
 
-  const whatsappHref = buildWhatsAppLink({
+  const details = {
     selectedDishes,
-  });
+  };
+  const whatsappHref = getWhatsAppUrl(details);
 
   return (
     <>
@@ -168,9 +169,13 @@ export function QuoteTray() {
                   {/* WhatsApp button with prefilled message */}
                   <a
                     href={whatsappHref}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      openWhatsApp(details);
+                    }}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-full bg-leaf text-white font-medium hover:opacity-90 transition-opacity text-xs"
+                    className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-full bg-leaf text-white font-medium hover:opacity-90 transition-opacity text-xs cursor-pointer"
                   >
                     <MessageCircle className="w-4 h-4" />
                     <span>Send enquiry via WhatsApp</span>

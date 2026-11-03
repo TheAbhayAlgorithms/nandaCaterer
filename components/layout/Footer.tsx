@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { Phone, MapPin, Clock, ChevronDown } from "lucide-react";
 import { Logo } from "@/components/ui/Logo";
 import { siteConfig } from "@/data/site";
+import { openWhatsApp, getWhatsAppUrl } from "@/lib/whatsapp";
 
 export function Footer() {
   const pathname = usePathname();
@@ -69,7 +70,11 @@ export function Footer() {
 
             {/* WhatsApp */}
             <a
-              href={siteConfig.social.whatsapp.url}
+              href={getWhatsAppUrl()}
+              onClick={(e) => {
+                e.preventDefault();
+                openWhatsApp();
+              }}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Chat with Nanda Caterers on WhatsApp"

@@ -1,4 +1,5 @@
 // Business configuration and facts per Section 9.1
+import { getWhatsAppUrl } from "@/lib/whatsapp";
 
 export const SITE_URL =
   process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL || "https://nandacaterer.com";
@@ -24,7 +25,7 @@ export const siteConfig = {
     whatsappNumber: "919967894979",
   },
   phoneTel: "tel:+919967894979",
-  whatsappUrl: "https://wa.me/919967894979",
+  whatsappUrl: getWhatsAppUrl(),
   hours: "MON-SAT: 9 AM - 9 PM",
   mapDirectionsUrl: "https://maps.google.com/?q=Nanda+Caterers+Bandra+East+Mumbai",
 
@@ -84,7 +85,7 @@ export const siteConfig = {
     },
     whatsapp: {
       name: "WhatsApp",
-      url: "https://wa.me/919967894979",
+      url: getWhatsAppUrl(),
     },
   },
 };

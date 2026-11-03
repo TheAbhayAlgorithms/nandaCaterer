@@ -15,6 +15,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { siteConfig } from "@/data/site";
+import { openWhatsApp, getWhatsAppUrl } from "@/lib/whatsapp";
 import { fivePrimaryFaqs } from "@/data/faq";
 import { SectionShell } from "@/components/shape/SectionShell";
 import { Eyebrow } from "@/components/ui/Eyebrow";
@@ -190,10 +191,14 @@ export function ContactTabs({}: ContactTabsProps = {}) {
                   </div>
                   <div className="mt-6 pt-4 border-t border-ink/10">
                     <a
-                      href={siteConfig.whatsappUrl}
+                      href={getWhatsAppUrl()}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        openWhatsApp();
+                      }}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-full bg-leaf text-white font-semibold text-xs shadow-xs hover:opacity-95 transition-opacity"
+                      className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-full bg-leaf text-white font-semibold text-xs shadow-xs hover:opacity-95 transition-opacity cursor-pointer"
                     >
                       <MessageCircle className="w-4 h-4" />
                       <span>Chat on WhatsApp</span>

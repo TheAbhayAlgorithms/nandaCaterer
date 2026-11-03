@@ -14,7 +14,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { siteConfig } from "@/data/site";
-import { buildWhatsAppLink } from "@/lib/whatsapp";
+import { openWhatsApp, getWhatsAppUrl } from "@/lib/whatsapp";
 import { cn } from "@/lib/cn";
 
 const CATERING_SERVICES = [
@@ -130,27 +130,24 @@ export function ConnectContent() {
     }
 
     const fullName = [firstName.trim(), lastName.trim()].filter(Boolean).join(" ");
-    const waUrl = buildWhatsAppLink({
+    const details = {
       firstName: firstName.trim(),
       lastName: lastName.trim(),
       fullName,
       phone: phone.trim(),
-      email: email.trim() || undefined,
-      service,
+      event: service,
       location: location.trim() || undefined,
-      eventDate: eventDate || undefined,
-      guestCount: guests.trim() || undefined,
-      message: message.trim() || undefined,
+      date: eventDate || undefined,
+      guests: guests.trim() || undefined,
+      notes: message.trim() || undefined,
       selectedDishes: selectedDishes.length > 0 ? selectedDishes : undefined,
-    });
+    };
+    const waUrl = getWhatsAppUrl(details);
 
     setGeneratedWaUrl(waUrl);
     setIsSuccess(true);
     triggerMarigoldConfetti();
-
-    if (typeof window !== "undefined") {
-      window.open(waUrl, "_blank", "noopener,noreferrer");
-    }
+    openWhatsApp(details);
   };
 
   const handleReset = () => {
@@ -205,10 +202,14 @@ export function ConnectContent() {
 
             {/* WhatsApp Desk */}
             <a
-              href={`https://wa.me/${siteConfig.phone.whatsappNumber}`}
+              href={getWhatsAppUrl()}
+              onClick={(e) => {
+                e.preventDefault();
+                openWhatsApp();
+              }}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-white/10 hover:bg-white/15 transition-colors border border-white/10 group"
+              className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-white/10 hover:bg-white/15 transition-colors border border-white/10 group cursor-pointer"
             >
               <div className="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center shrink-0 shadow-sm text-white group-hover:scale-105 transition-transform">
                 <MessageCircle className="w-5 h-5" />
@@ -277,9 +278,19 @@ export function ConnectContent() {
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
                 <a
                   href={generatedWaUrl}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (generatedWaUrl) {
+                      const textPart = generatedWaUrl.split("text=")[1];
+                      if (textPart) {
+                        console.log("[WhatsApp] Decoded message preview:\n" + decodeURIComponent(textPart));
+                      }
+                      window.open(generatedWaUrl, "_blank", "noopener,noreferrer");
+                    }
+                  }}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm transition-all shadow-md active:scale-95"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm transition-all shadow-md active:scale-95 cursor-pointer"
                 >
                   <MessageCircle className="w-5 h-5" />
                   <span>Open WhatsApp Chat Now</span>

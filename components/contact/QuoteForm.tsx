@@ -8,7 +8,7 @@ import confetti from "canvas-confetti";
 import { CheckCircle2, MessageCircle, AlertCircle, UtensilsCrossed } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { useQuoteSelection } from "@/context/QuoteSelectionContext";
-import { buildWhatsAppLink } from "@/lib/whatsapp";
+import { openWhatsApp, getWhatsAppUrl } from "@/lib/whatsapp";
 
 const phoneRegex = /^(?:(?:\+|0{0,2})91(\s*[-]\s*)?|[0]?)?[6789]\d{9}$/;
 
@@ -107,7 +107,7 @@ export function QuoteForm({ initialService, initialDishes, className }: QuoteFor
       triggerMarigoldConfetti();
 
       // Automatically open WhatsApp with all filled details
-      const waLink = buildWhatsAppLink({
+      openWhatsApp({
         firstName: data.firstName,
         lastName: data.lastName,
         phone: data.phone,
@@ -119,10 +119,6 @@ export function QuoteForm({ initialService, initialDishes, className }: QuoteFor
         selectedDishes: activeDishes,
       });
 
-      if (typeof window !== "undefined") {
-        window.open(waLink, "_blank", "noopener,noreferrer");
-      }
-
       reset();
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : "Something went wrong. Please call us directly.";
@@ -131,7 +127,7 @@ export function QuoteForm({ initialService, initialDishes, className }: QuoteFor
   };
 
   if (isSuccess && submittedData) {
-    const whatsappLink = buildWhatsAppLink({
+    const successDetails = {
       firstName: submittedData.firstName,
       lastName: submittedData.lastName,
       phone: submittedData.phone,
@@ -141,7 +137,8 @@ export function QuoteForm({ initialService, initialDishes, className }: QuoteFor
       guestCount: submittedData.guests,
       message: submittedData.message,
       selectedDishes: activeDishes,
-    });
+    };
+    const whatsappLink = getWhatsAppUrl(successDetails);
 
     return (
       <div className="rounded-2xl bg-ivory p-8 md:p-10 border border-turmeric/40 shadow-warm text-center space-y-6">
@@ -172,9 +169,13 @@ export function QuoteForm({ initialService, initialDishes, className }: QuoteFor
         <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
           <a
             href={whatsappLink}
+            onClick={(e) => {
+              e.preventDefault();
+              openWhatsApp(successDetails);
+            }}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-emerald-600 text-white font-medium hover:bg-emerald-500 shadow-md transition-colors"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-emerald-600 text-white font-medium hover:bg-emerald-500 shadow-md transition-colors cursor-pointer"
           >
             <MessageCircle className="w-5 h-5" />
             <span>Send Details on WhatsApp</span>

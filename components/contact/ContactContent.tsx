@@ -3,6 +3,7 @@
 import React from "react";
 import { Phone, Mail, MapPin, Clock, MessageCircle, ExternalLink } from "lucide-react";
 import { siteConfig } from "@/data/site";
+import { openWhatsApp, getWhatsAppUrl } from "@/lib/whatsapp";
 import { faqList } from "@/data/faq";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { QuoteForm } from "./QuoteForm";
@@ -125,10 +126,14 @@ export function ContactContent({ initialService, initialDishes }: ContactContent
 
               <div className="pt-6 border-t border-white/10 mt-6">
                 <a
-                  href={`https://wa.me/${siteConfig.phone.whatsappNumber}`}
+                  href={getWhatsAppUrl()}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    openWhatsApp();
+                  }}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-emerald-600 text-white font-medium hover:bg-emerald-500 transition-colors text-xs"
+                  className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-emerald-600 text-white font-medium hover:bg-emerald-500 transition-colors text-xs cursor-pointer"
                 >
                   <MessageCircle className="w-4 h-4" />
                   <span>Chat on WhatsApp</span>

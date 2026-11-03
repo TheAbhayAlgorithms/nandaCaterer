@@ -21,7 +21,7 @@ import {
 } from "lucide-react";
 import { useQuoteSelection } from "@/context/QuoteSelectionContext";
 import { siteConfig } from "@/data/site";
-import { buildWhatsAppLink } from "@/lib/whatsapp";
+import { openWhatsApp, getWhatsAppUrl } from "@/lib/whatsapp";
 import { Button } from "@/components/ui/Button";
 
 const EVENT_TYPES = [
@@ -103,16 +103,18 @@ export function QuoteWizard() {
     }).format(num);
   };
 
-  const whatsappHref = buildWhatsAppLink({
-    firstName: fullName,
+  const whatsappDetails = {
+    fullName,
     phone,
     location,
-    service: `${eventType} (${currentPkg.name})`,
-    eventDate: eventDate ? `${eventDate} (${mealSlot})` : mealSlot,
-    guestCount: `${guestCount} Guests`,
-    message: `${notes}${jainRequired ? " | Strict Jain Menu Required" : ""}${liveCountersWanted ? " | Live Food Counters Requested" : ""}`,
+    event: `${eventType} (${currentPkg.name})`,
+    date: eventDate ? `${eventDate} (${mealSlot})` : mealSlot,
+    guests: `${guestCount} Guests`,
+    notes: `${notes}${jainRequired ? " | Strict Jain Menu Required" : ""}${liveCountersWanted ? " | Live Food Counters Requested" : ""}`,
     selectedDishes: selectedDishes.length > 0 ? selectedDishes : undefined,
-  });
+  };
+
+  const whatsappHref = getWhatsAppUrl(whatsappDetails);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -632,9 +634,13 @@ export function QuoteWizard() {
             <div className="space-y-3 pt-4 border-t border-charcoal/10">
               <a
                 href={whatsappHref}
+                onClick={(e) => {
+                  e.preventDefault();
+                  openWhatsApp(whatsappDetails);
+                }}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full flex items-center justify-center gap-2.5 py-4 px-6 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md hover:shadow-lg transition-all"
+                className="w-full flex items-center justify-center gap-2.5 py-4 px-6 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md hover:shadow-lg transition-all cursor-pointer"
               >
                 <MessageCircle className="w-5 h-5" />
                 <span>Lock In This Pricing On WhatsApp (Instant Reply)</span>

@@ -149,6 +149,7 @@ export default function RootLayout({
       className={`${playfair.variable} ${poppins.variable} ${caveat.variable} ${lora.variable} ${merriweather.variable} scroll-smooth`}
     >
       <head>
+        <meta charSet="UTF-8" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

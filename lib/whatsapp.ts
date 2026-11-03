@@ -1,129 +1,143 @@
-export interface CateringWhatsAppDetails {
+export const WHATSAPP_PHONE = "919967894979"; // country code + number, digits only, no + or spaces
+
+export interface WhatsAppDetails {
+  name?: string;
+  fullName?: string;
   firstName?: string;
   lastName?: string;
-  fullName?: string;
   phone?: string;
   email?: string;
-  location?: string;
+  event?: string;
   service?: string;
   serviceType?: string;
+  eventType?: string;
+  date?: string;
   eventDate?: string;
-  guestCount?: string;
-  menuPreference?: string;
+  guests?: string | number;
+  guestCount?: string | number;
+  exactGuests?: string;
+  guestRange?: string;
+  location?: string;
+  city?: string;
+  notes?: string;
   message?: string;
   customMessage?: string;
+  specialRequests?: string;
+  menuPreference?: string;
   selectedDishes?: string[];
 }
 
-export function buildWhatsAppLink(details?: CateringWhatsAppDetails): string {
-  const baseNumber = "919967894979";
-  const divider = "━━━━━━━━━━━━━━━━━━━━━━━━━━━━";
+export type CateringWhatsAppDetails = WhatsAppDetails;
 
-  if (!details) {
-    const defaultLines = [
-      "👑 *NANDA CATERERS*",
-      "🍽️ _A Perfect Blend of Sensational Food_",
-      "",
-      divider,
-      "Hello Nanda Caterers! I would like to enquire about your catering services.",
-      divider,
-      "",
-      "For more information",
-      "visit - https://nandacaterer.com",
-    ];
-    return `https://wa.me/${baseNumber}?text=${encodeURIComponent(defaultLines.join("\n"))}`;
+/**
+ * Builds the plain text WhatsApp enquiry message.
+ * Uses high-elegance Unicode iconography (✦, ◆, ☏, ★, ▦, ◉, ⚲, ❖, •) that are 100% immune
+ * to WhatsApp Web/Desktop/wa.me encoding bugs, never degrading into '?' or ''.
+ */
+export function buildWhatsAppMessage(details: WhatsAppDetails = {}): string {
+  const name =
+    details.name ||
+    details.fullName ||
+    [details.firstName, details.lastName].filter(Boolean).join(" ") ||
+    "-";
+
+  const phone = details.phone || "-";
+
+  const event =
+    details.event ||
+    details.service ||
+    details.serviceType ||
+    details.eventType ||
+    "-";
+
+  const date = details.date || details.eventDate || "-";
+
+  const guests =
+    details.guests != null && String(details.guests).trim() !== ""
+      ? String(details.guests)
+      : details.guestCount != null && String(details.guestCount).trim() !== ""
+      ? String(details.guestCount)
+      : details.exactGuests && details.exactGuests.trim() !== ""
+      ? `${details.exactGuests.trim()} guests`
+      : details.guestRange && details.guestRange.trim() !== ""
+      ? details.guestRange
+      : "-";
+
+  const location = details.location || details.city || "-";
+
+  const notes =
+    details.notes ||
+    details.message ||
+    details.customMessage ||
+    details.specialRequests;
+
+  const menuPref = details.menuPreference;
+  const dishes =
+    details.selectedDishes && details.selectedDishes.length > 0
+      ? details.selectedDishes
+      : null;
+
+  let message =
+`✦ *Namaste Nanda Caterers!* ✦
+
+I would like to enquire about your catering services.
+
+◆ *Name:* ${name}
+☏ *Phone:* ${phone}
+★ *Event:* ${event}
+▦ *Date:* ${date}
+◉ *Guests:* ${guests}
+⚲ *Location:* ${location}`;
+
+  if (details.email && details.email.trim()) {
+    message += `\n✉ *Email:* ${details.email.trim()}`;
   }
 
-  const hasClientInfo = Boolean(
-    details.fullName?.trim() ||
-    details.firstName?.trim() ||
-    details.lastName?.trim() ||
-    details.phone?.trim()
-  );
-
-  const hasDishesOnly = !hasClientInfo && details.selectedDishes && details.selectedDishes.length > 0;
-
-  if (hasDishesOnly) {
-    const dishesLines: string[] = [
-      "👑 *NANDA CATERERS*",
-      "🍽️ _A Perfect Blend of Sensational Food_",
-      "",
-      divider,
-      "🍽️ *MENU DISHES SELECTION*",
-      divider,
-      "Hello Nanda Caterers! I have selected the following dishes from your website menu:",
-      "",
-      `• 🥘 *Selected Menu Dishes (${details.selectedDishes!.length}):*`,
-    ];
-
-    details.selectedDishes!.forEach((dish) => {
-      dishesLines.push(`   ▪️ ${dish}`);
-    });
-
-    dishesLines.push("");
-    dishesLines.push("Please share catering availability and estimate packages for these items.");
-    dishesLines.push(divider);
-    dishesLines.push("For more information");
-    dishesLines.push("visit - https://nandacaterer.com");
-
-    return `https://wa.me/${baseNumber}?text=${encodeURIComponent(dishesLines.join("\n"))}`;
+  if (menuPref) {
+    message += `\n❖ *Menu Preference:* ${menuPref}`;
   }
 
-  const lines: string[] = [
-    "👑 *NANDA CATERERS*",
-    "🍽️ _A Perfect Blend of Sensational Food_",
-    "",
-    divider,
-    "📋 *NEW CATERING ENQUIRY*",
-    divider,
-  ];
-
-  const clientName =
-    details.fullName?.trim() ||
-    [details.firstName, details.lastName].filter(Boolean).join(" ").trim() ||
-    "Valued Client";
-  lines.push(`• 👤 *Client Name:* ${clientName}`);
-
-  if (details.phone?.trim()) {
-    lines.push(`• 📞 *Contact Phone:* ${details.phone.trim()}`);
+  if (notes) {
+    message += `\n✎ *Notes:* ${notes}`;
   }
 
-  if (details.email?.trim()) {
-    lines.push(`• ✉️ *Email Address:* ${details.email.trim()}`);
+  if (dishes) {
+    message += `\n\n❖ *Selected Dishes (${dishes.length}):*\n` + dishes.map((d) => `  • ${d}`).join("\n");
   }
 
-  const srv = details.service || details.serviceType || "General Event";
-  lines.push(`• 🍽️ *Catering Service:* ${srv}`);
+  message += `\n\n✦ Please share your menu and pricing. Thank you!`;
 
-  if (details.eventDate) {
-    lines.push(`• 📅 *Event Date:* ${details.eventDate}`);
-  }
-  if (details.guestCount) {
-    lines.push(`• 👥 *Estimated Guests:* ${details.guestCount}`);
-  }
-  if (details.location?.trim()) {
-    lines.push(`• 📍 *Event Location:* ${details.location.trim()}`);
-  }
-  if (details.menuPreference?.trim()) {
-    lines.push(`• 🥗 *Menu Preference:* ${details.menuPreference.trim()}`);
-  }
+  return message;
+}
 
-  const msg = details.message || details.customMessage;
-  if (msg?.trim()) {
-    lines.push(`• 📝 *Special Notes:* ${msg.trim()}`);
+/**
+ * Generates the WhatsApp URL.
+ * Uses api.whatsapp.com directly to bypass wa.me's intermediate 302 redirect.
+ */
+export function getWhatsAppUrl(details: WhatsAppDetails = {}): string {
+  const message = buildWhatsAppMessage(details);
+  return `https://api.whatsapp.com/send?phone=${WHATSAPP_PHONE}&text=${encodeURIComponent(message)}`;
+}
+
+/**
+ * Alias for getWhatsAppUrl.
+ */
+export const getWhatsAppApiUrl = getWhatsAppUrl;
+export const buildWhatsAppLink = getWhatsAppUrl;
+
+/**
+ * ONE reusable function to trigger WhatsApp across the entire application.
+ * Opens directly in WhatsApp / WhatsApp Web and logs the preview in the browser console.
+ */
+export function openWhatsApp(details: WhatsAppDetails = {}): void {
+  const url = getWhatsAppUrl(details);
+
+  if (typeof window !== "undefined") {
+    const textPart = url.split("text=")[1];
+    if (textPart) {
+      console.log("[WhatsApp] Opening URL:", url);
+      console.log("[WhatsApp] Decoded message preview:\n" + decodeURIComponent(textPart));
+    }
+    window.open(url, "_blank", "noopener,noreferrer");
   }
-
-  if (details.selectedDishes && details.selectedDishes.length > 0) {
-    lines.push("");
-    lines.push(`• 🥘 *Selected Menu Dishes (${details.selectedDishes.length}):*`);
-    details.selectedDishes.forEach((dish) => {
-      lines.push(`   ▪️ ${dish}`);
-    });
-  }
-
-  lines.push(divider);
-  lines.push("For more information");
-  lines.push("visit - https://nandacaterer.com");
-
-  return `https://wa.me/${baseNumber}?text=${encodeURIComponent(lines.join("\n"))}`;
 }
