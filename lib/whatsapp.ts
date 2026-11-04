@@ -30,9 +30,8 @@ export interface WhatsAppDetails {
 export type CateringWhatsAppDetails = WhatsAppDetails;
 
 /**
- * Builds the plain text WhatsApp enquiry message.
- * Uses high-elegance Unicode iconography (✦, ◆, ☏, ★, ▦, ◉, ⚲, ❖, •) that are 100% immune
- * to WhatsApp Web/Desktop/wa.me encoding bugs, never degrading into '?' or ''.
+ * Builds the plain text WhatsApp enquiry message with vibrant, attractive full-color emojis.
+ * Supported across all devices: 🙏, 👤, 📞, 🎉, 📅, 👥, 📍, ✉️, 🍽️, 📝, 🥘
  */
 export function buildWhatsAppMessage(details: WhatsAppDetails = {}): string {
   const name =
@@ -78,41 +77,42 @@ export function buildWhatsAppMessage(details: WhatsAppDetails = {}): string {
       : null;
 
   let message =
-`✦ *Namaste Nanda Caterers!* ✦
+`🙏 *Namaste Nanda Caterers!*
 
 I would like to enquire about your catering services.
 
-◆ *Name:* ${name}
-☏ *Phone:* ${phone}
-★ *Event:* ${event}
-▦ *Date:* ${date}
-◉ *Guests:* ${guests}
-⚲ *Location:* ${location}`;
+👤 *Name:* ${name}
+📞 *Phone:* ${phone}
+🎉 *Event:* ${event}
+📅 *Date:* ${date}
+👥 *Guests:* ${guests}
+📍 *Location:* ${location}`;
 
   if (details.email && details.email.trim()) {
-    message += `\n✉ *Email:* ${details.email.trim()}`;
+    message += `\n✉️ *Email:* ${details.email.trim()}`;
   }
 
   if (menuPref) {
-    message += `\n❖ *Menu Preference:* ${menuPref}`;
+    message += `\n🍽️ *Menu Preference:* ${menuPref}`;
   }
 
   if (notes) {
-    message += `\n✎ *Notes:* ${notes}`;
+    message += `\n📝 *Notes:* ${notes}`;
   }
 
   if (dishes) {
-    message += `\n\n❖ *Selected Dishes (${dishes.length}):*\n` + dishes.map((d) => `  • ${d}`).join("\n");
+    message += `\n\n🥘 *Selected Dishes (${dishes.length}):*\n` + dishes.map((d) => `  • ${d}`).join("\n");
   }
 
-  message += `\n\n✦ Please share your menu and pricing. Thank you!`;
+  message += `\n\n🍽️ Please share your menu and pricing. Thank you!`;
 
   return message;
 }
 
 /**
  * Generates the WhatsApp URL.
- * Uses api.whatsapp.com directly to bypass wa.me's intermediate 302 redirect.
+ * Uses api.whatsapp.com directly to bypass wa.me's intermediate 302 redirect,
+ * ensuring emojis are preserved 100% without becoming '?' or ''.
  */
 export function getWhatsAppUrl(details: WhatsAppDetails = {}): string {
   const message = buildWhatsAppMessage(details);

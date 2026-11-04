@@ -46,7 +46,7 @@ export function Logo({ className, theme = "dark", withLink = true }: LogoProps) 
           Nanda{" "}
           <span
             className={cn(
-              "font-heading font-bold transition-all",
+              "font-heading font-extrabold transition-all",
               isLight
                 ? "text-transparent bg-clip-text bg-gradient-to-r from-[#FDE68A] via-[#F59E0B] to-[#E8A838]"
                 : "text-accent"
