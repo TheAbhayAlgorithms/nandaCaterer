@@ -19,7 +19,7 @@ export function Logo({ className, theme = "dark", withLink = true }: LogoProps) 
         className={cn(
           "relative w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white shadow-md p-0.5 border flex items-center justify-center shrink-0 group-hover:scale-105 transition-all overflow-hidden",
           isLight
-            ? "border-white/40 ring-2 ring-saffron/40 shadow-[0_2px_14px_rgba(0,0,0,0.5)]"
+            ? "border-white/30 ring-2 ring-white/20 shadow-[0_2px_14px_rgba(0,0,0,0.5)]"
             : "border-accent/20"
         )}
       >
@@ -48,7 +48,7 @@ export function Logo({ className, theme = "dark", withLink = true }: LogoProps) 
             className={cn(
               "font-heading font-black transition-all",
               isLight
-                ? "text-saffron drop-shadow-[0_0_12px_rgba(242,154,31,0.5)]"
+                ? "text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]"
                 : "text-accent"
             )}
           >
@@ -59,12 +59,12 @@ export function Logo({ className, theme = "dark", withLink = true }: LogoProps) 
           className={cn(
             "text-[9.5px] uppercase tracking-[0.24em] font-bold leading-none mt-1.5 transition-colors flex items-center gap-1.5",
             isLight
-              ? "text-white/90 drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]"
+              ? "text-white/80 drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]"
               : "text-ink/70"
           )}
         >
           <span>MUMBAI</span>
-          <span className={cn("text-[9px]", isLight ? "text-saffron" : "text-accent")}>•</span>
+          <span className="text-accent">•</span>
           <span>SINCE 2005</span>
         </span>
       </div>
