@@ -30,8 +30,8 @@ export interface WhatsAppDetails {
 export type CateringWhatsAppDetails = WhatsAppDetails;
 
 /**
- * Builds the plain text WhatsApp enquiry message with vibrant, attractive full-color emojis.
- * Supported across all devices: 🙏, 👤, 📞, 🎉, 📅, 👥, 📍, ✉️, 🍽️, 📝, 🥘
+ * Builds the plain text WhatsApp enquiry message with vibrant, attractive full-color emojis
+ * and clean spacing between fields so the message is readable and never cramped.
  */
 export function buildWhatsAppMessage(details: WhatsAppDetails = {}): string {
   const name =
@@ -76,35 +76,37 @@ export function buildWhatsAppMessage(details: WhatsAppDetails = {}): string {
       ? details.selectedDishes
       : null;
 
-  let message =
-`🙏 *Namaste Nanda Caterers!*
-
-I would like to enquire about your catering services.
-
-👤 *Name:* ${name}
-📞 *Phone:* ${phone}
-🎉 *Event:* ${event}
-📅 *Date:* ${date}
-👥 *Guests:* ${guests}
-📍 *Location:* ${location}`;
+  // Build items with spacious double newlines between fields
+  const sections: string[] = [
+    `✨ *Namaste Nanda Caterers!* 🙏`,
+    `I would like to enquire about your catering services.`,
+    `👤 *Name:* ${name}`,
+    `📱 *Phone:* ${phone}`,
+    `🎉 *Event:* ${event}`,
+    `📅 *Date:* ${date}`,
+    `👥 *Guests:* ${guests}`,
+    `📍 *Location:* ${location}`,
+  ];
 
   if (details.email && details.email.trim()) {
-    message += `\n✉️ *Email:* ${details.email.trim()}`;
+    sections.push(`📧 *Email:* ${details.email.trim()}`);
   }
 
   if (menuPref) {
-    message += `\n🍽️ *Menu Preference:* ${menuPref}`;
+    sections.push(`🍽️ *Menu Preference:* ${menuPref}`);
   }
 
   if (notes) {
-    message += `\n📝 *Notes:* ${notes}`;
+    sections.push(`📝 *Notes:* ${notes}`);
   }
+
+  let message = sections.join("\n\n");
 
   if (dishes) {
     message += `\n\n🥘 *Selected Dishes (${dishes.length}):*\n` + dishes.map((d) => `  • ${d}`).join("\n");
   }
 
-  message += `\n\n🍽️ Please share your menu and pricing. Thank you!`;
+  message += `\n\n✨ *Please share your menu and pricing. Thank you!* 🙏`;
 
   return message;
 }
