@@ -8,7 +8,7 @@ import { TornEdge } from "@/components/shape/TornEdge";
 
 export function Hero() {
   return (
-    <section className="relative w-full overflow-hidden bg-night text-white flex flex-col justify-center items-center" style={{ minHeight: "min(88svh, 820px)" }}>
+    <section className="relative w-full overflow-hidden bg-night text-white flex flex-col justify-center items-center min-h-[96svh] sm:min-h-[min(90svh,860px)]">
       {/* Background Image with slow zoom focused on the crisp in-focus catering feast */}
       <motion.div
         initial={{ scale: 1 }}
@@ -29,7 +29,7 @@ export function Hero() {
       </motion.div>
 
       {/* Centred Content Stack */}
-      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-28 pb-20 flex flex-col items-center">
+      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-32 sm:pt-36 pb-28 sm:pb-24 flex flex-col items-center">
         {/* Tiny uppercase eyebrow */}
         <motion.p
           initial={{ opacity: 0, y: -10 }}

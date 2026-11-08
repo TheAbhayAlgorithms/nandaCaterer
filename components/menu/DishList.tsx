@@ -94,8 +94,8 @@ export function DishList({ dishes, searchQuery, sectionTitle }: DishListProps) {
             <div
               key={dish.name}
               className={cn(
-                "group relative flex flex-col justify-between p-3.5 rounded-2xl bg-paper border border-ink/10 transition-all duration-200 hover:shadow-card hover:-translate-y-0.5",
-                isSelected && "border-accent/40 bg-peach/20"
+                "group relative flex flex-col justify-between p-4 rounded-2xl bg-paper border border-ink/10 transition-all duration-300 shadow-card hover:shadow-warm hover:-translate-y-1 hover:border-accent/30",
+                isSelected && "border-accent/50 bg-gradient-to-br from-peach/30 to-peach/50 ring-1 ring-accent/30 shadow-warm"
               )}
             >
               {/* Optional dish image thumbnail if present */}

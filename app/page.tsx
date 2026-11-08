@@ -19,6 +19,7 @@ export default async function HomePage() {
     name: cat.title,
     slug: cat.slug,
     image: cat.image,
+    tagline: cat.tagline,
   }));
 
   const carouselItems = images.slice(0, 8).map((img) => ({
