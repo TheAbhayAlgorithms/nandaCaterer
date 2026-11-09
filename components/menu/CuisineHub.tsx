@@ -66,8 +66,8 @@ export function CuisineHub({ categories = menuCategories }: CuisineHubProps) {
 
                   <div className="pt-4 border-t border-accent/10 mt-4 flex items-center justify-between text-xs font-bold text-accent group-hover:text-accent-dark transition-colors">
                     <span>Explore Selection</span>
-                    <div className="w-6 h-6 rounded-full bg-accent/10 group-hover:bg-accent group-hover:text-white flex items-center justify-center transition-all duration-200">
-                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                    <div className="w-6 h-6 rounded-full bg-accent/10 group-hover:bg-accent group-hover:text-white flex items-center justify-center shrink-0 transition-colors duration-200">
+                      <ArrowRight className="w-3.5 h-3.5" />
                     </div>
                   </div>
                 </div>
