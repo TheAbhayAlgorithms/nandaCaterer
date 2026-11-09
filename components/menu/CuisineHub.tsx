@@ -51,13 +51,6 @@ export function CuisineHub({ categories = menuCategories }: CuisineHubProps) {
                       <span>{dishCount > 0 ? `${dishCount} Dishes` : "Specialty"}</span>
                     </span>
                   </div>
-
-                  {/* Category Group Pill */}
-                  <div className="absolute bottom-2.5 left-3.5 z-10">
-                    <span className="text-[10px] uppercase font-bold tracking-wider text-white/90 drop-shadow-xs">
-                      {category.group}
-                    </span>
-                  </div>
                 </div>
 
                 {/* Card Body */}
